@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../widgets/internet_check_widgets.dart';
+
 class HomeScreen extends StatefulWidget {
   final String title;
   const HomeScreen({
@@ -29,24 +31,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-class InternetCheck extends StatelessWidget {
-  const InternetCheck({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<InternetCubit, InternetState>(
-      builder: (context, state) {
-        if (state == InternetLoading()) {
-          return LoadingInternet();
-        } else if (state == InternetConnected()) {
-          return HavingInternet();
-        } else
-          return NoInternet();
-      },
-    );
-  }
-}
-
