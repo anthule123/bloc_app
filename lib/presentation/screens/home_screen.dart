@@ -50,39 +50,3 @@ class InternetCheck extends StatelessWidget {
   }
 }
 
-class NoInternet extends StatelessWidget {
-  const NoInternet({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('Đang không có Internet'),
-      content: Center(
-          child: Text('Bạn phải có kết nối Internet thì mới chạy được app')),
-    );
-  }
-}
-
-class HavingInternet extends StatelessWidget {
-  const HavingInternet({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(title: Text('Đang có internet'));
-  }
-}
-
-class LoadingInternet extends StatelessWidget {
-  const LoadingInternet({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('Đang load internet');
-  }
-}
