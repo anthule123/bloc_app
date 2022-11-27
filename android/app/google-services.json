@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "833102393471",
+    "project_id": "patient-management-b833e",
+    "storage_bucket": "patient-management-b833e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833102393471:android:f918682bdaf261f2c3cf4a",
+        "android_client_info": {
+          "package_name": "com.An.bloc_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833102393471-o8hni1rjntj2dbegr3uhfvv86vdhh0jb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNsft30MXl0137qsebzskMWFXu9ZWwRQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833102393471-o8hni1rjntj2dbegr3uhfvv86vdhh0jb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-import 'package:bloc_app/logic/cubits/cubit/internet_cubit.dart';
+import 'package:bloc_app/logic/cubits/internet/internet_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,7 +44,9 @@ class HavingInternet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(title: Text('Đang có internet'));
+    return SizedBox(
+      height: 10,
+    );
   }
 }
 
