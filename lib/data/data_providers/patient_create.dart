@@ -10,6 +10,7 @@ Future<dataSending> createPatient(Patient patient) async {
     "id": patient.id,
   };
   var db = FirebaseFirestore.instance;
+  
   db.collection("patient").doc("${patient.id}").set(data).onError((e, _) {
     return dataSending.failure;
   });

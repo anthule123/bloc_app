@@ -26,6 +26,7 @@ class PatientAddCubit extends Cubit<PatientAddState> {
   }
 
   Future<void> sendData() async {
+    state.data_sending = dataSending.sending;
     state.data_sending = await createPatient(state.patient);
     emit(state);
   }
