@@ -8,26 +8,14 @@ import 'package:nice_buttons/nice_buttons.dart';
 
 import '../../../logic/cubits/patient_add/patient_add_cubit.dart';
 
-class PatientProfileMakingID extends StatefulWidget {
+class PatientProfileMakingID extends StatelessWidget {
   const PatientProfileMakingID({super.key});
 
-  @override
-  State<PatientProfileMakingID> createState() => _PatientProfileMakingIDState();
-}
-
-class _PatientProfileMakingIDState extends State<PatientProfileMakingID> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Lập hồ sơ bệnh nhân (ID)'),
-        actions: [
-          BackButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
       ),
       body: BlocProvider(
         create: (_) => TextFormCubit(),
@@ -56,7 +44,8 @@ class _PatientProfileMakingIDState extends State<PatientProfileMakingID> {
                   ),
                 ),
               ),
-              Text(BlocProvider.of<PatientAddCubit>(context).state.patient.name),
+              Text(
+                  BlocProvider.of<PatientAddCubit>(context).state.patient.name),
               Text(BlocProvider.of<PatientAddCubit>(context).state.patient.id),
               ConfirmButton(notice: 'ID'),
             ],
@@ -65,6 +54,10 @@ class _PatientProfileMakingIDState extends State<PatientProfileMakingID> {
       ),
     );
   }
+}
+
+bool checkID(String id) {
+  return id.length == 10;
 }
 
 class ConfirmButton extends StatelessWidget {
@@ -76,7 +69,7 @@ class ConfirmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (BlocProvider.of<TextFormCubit>(context).state.text != '')
+    if (checkID(BlocProvider.of<TextFormCubit>(context).state.text))
       return NiceButtons(
           stretch: false,
           onTap: (finish) {
@@ -116,6 +109,6 @@ class ConfirmButton extends StatelessWidget {
           },
           child: Text('Xác nhận'));
     else
-      return Text('Bạn cần nhập ${this.notice}.');
+      return Text('Bạn cần nhập ${this.notice} gồm 10 kí tự.');
   }
 }

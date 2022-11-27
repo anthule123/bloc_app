@@ -22,6 +22,7 @@ class _FinalCreatePatientState extends State<FinalCreatePatient> {
       ),
       body: BlocBuilder<PatientAddCubit, PatientAddState>(
           builder: (context, state) {
+        
         BlocProvider.of<PatientAddCubit>(context).sendData();
         if (state.data_sending == dataSending.failure) {
           return Text('Hồ sơ này được cập nhật thất bại');

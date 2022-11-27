@@ -6,14 +6,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
-class PatientProfileMaking extends StatefulWidget {
+class PatientProfileMaking extends StatelessWidget {
   const PatientProfileMaking({super.key});
 
-  @override
-  State<PatientProfileMaking> createState() => _PatientProfileMakingState();
-}
-
-class _PatientProfileMakingState extends State<PatientProfileMaking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

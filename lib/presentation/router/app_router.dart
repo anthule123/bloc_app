@@ -8,7 +8,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../screens/current_patient_screens/patient_screen.dart';
+import '../screens/doctor_screens/doctor_screen.dart';
 import '../screens/home_screen.dart';
+import '../screens/setting_screens/setting_screen.dart';
 
 class AppRouter {
   final PatientAddCubit _patientAddCubit = PatientAddCubit();
@@ -18,7 +21,7 @@ class AppRouter {
         {
           return MaterialPageRoute(
             builder: (_) => HomeScreen(
-              title: 'Home Screen',
+              title: 'Trang chủ',
               color: Colors.blue.shade700,
             ),
           );
@@ -50,6 +53,18 @@ class AppRouter {
             ),
           );
         }
+      case ('/doctor'):
+        return MaterialPageRoute(
+          builder: (context) => DoctorScreen(),
+        );
+      case ('/patient'):
+        return MaterialPageRoute(
+          builder: (context) => PatientScreen(),
+        );
+      case ('/setting'):
+        return MaterialPageRoute(
+          builder: (context) => SettingScreen(),
+        );
       default:
         return null;
     }

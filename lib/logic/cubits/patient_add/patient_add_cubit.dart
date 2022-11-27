@@ -17,17 +17,17 @@ class PatientAddCubit extends Cubit<PatientAddState> {
 
   Future<void> updateName(String newName) async {
     state.patient.name = newName;
-    emit(state);
+    //emit(state);
   }
 
   Future<void> updateID(String newID) async {
     state.patient.id = newID;
-    emit(state);
+    //emit(state);
   }
 
   Future<void> sendData() async {
-    state.data_sending = dataSending.sending;
+    state.data_sending = await dataSending.sending;
     state.data_sending = await createPatient(state.patient);
-    emit(state);
+    //emit(state);
   }
 }
