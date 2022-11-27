@@ -18,17 +18,17 @@ class _FinalCreatePatientState extends State<FinalCreatePatient> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kết quả của việc tạo bệnh nhân mới'),
+        title: Text('Kết quả nộp hồ sơ'),
       ),
       body: BlocBuilder<PatientAddCubit, PatientAddState>(
           builder: (context, state) {
         BlocProvider.of<PatientAddCubit>(context).sendData();
         if (state.data_sending == dataSending.failure) {
-          return Text('Dữ liệu này được cập nhật thất bại');
+          return Text('Hồ sơ này được cập nhật thất bại');
         } else if (state.data_sending == dataSending.sending) {
-          return Text('Đang gửi dữ liệu bệnh nhân đến Firebase.');
+          return Text('Đang gửi hồ sơ đến Firebase.');
         } else if (state.data_sending == dataSending.success) {
-          return Text('Dữ liệu này được cập nhật thành công.');
+          return Text('Hồ sơ này được cập nhật thành công.');
         } else {
           return Text('Có lỗi xảy ra');
         }
