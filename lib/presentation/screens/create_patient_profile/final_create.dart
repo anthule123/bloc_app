@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/patient.dart';
+import '../../widgets/bottom_navitgator.dart';
 
 class FinalCreatePatient extends StatefulWidget {
   const FinalCreatePatient({super.key});
@@ -22,7 +23,6 @@ class _FinalCreatePatientState extends State<FinalCreatePatient> {
       ),
       body: BlocBuilder<PatientAddCubit, PatientAddState>(
           builder: (context, state) {
-        
         BlocProvider.of<PatientAddCubit>(context).sendData();
         if (state.data_sending == dataSending.failure) {
           return Text('Hồ sơ này được cập nhật thất bại');
@@ -34,6 +34,7 @@ class _FinalCreatePatientState extends State<FinalCreatePatient> {
           return Text('Có lỗi xảy ra');
         }
       }),
+      bottomNavigationBar: bottomNavigator(),
     );
   }
 }

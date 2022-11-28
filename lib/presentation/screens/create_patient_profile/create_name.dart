@@ -6,6 +6,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
+import '../../widgets/bottom_navitgator.dart';
+
 class PatientProfileMaking extends StatelessWidget {
   const PatientProfileMaking({super.key});
 
@@ -57,7 +59,8 @@ class PatientProfileMaking extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(BlocProvider.of<PatientAddCubit>(context).state.patient.name),
+              Text(
+                  BlocProvider.of<PatientAddCubit>(context).state.patient.name),
               Text(BlocProvider.of<PatientAddCubit>(context).state.patient.id),
               NextButton(
                 notice: 'họ và tên',
@@ -66,6 +69,7 @@ class PatientProfileMaking extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: bottomNavigator(),
     );
   }
 }

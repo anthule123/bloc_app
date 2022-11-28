@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 import '../../../logic/cubits/patient_add/patient_add_cubit.dart';
+import '../../widgets/bottom_navitgator.dart';
 
 class PatientProfileMakingID extends StatelessWidget {
   const PatientProfileMakingID({super.key});
@@ -17,39 +18,51 @@ class PatientProfileMakingID extends StatelessWidget {
       appBar: AppBar(
         title: Text('Lập hồ sơ bệnh nhân (ID)'),
       ),
-      body: BlocProvider(
-        create: (_) => TextFormCubit(),
-        child: BlocBuilder<TextFormCubit, TextFormState>(
-          builder: (context, state) => Column(
-            children: [
-              SizedBox(height: 20),
-              Text(
-                ' Điền id bệnh nhân (10 chữ số):',
-                textScaleFactor: 1.5,
-                textAlign: TextAlign.left,
-              ),
-              Center(
-                child: SizedBox(
-                  width: 300.0,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'ID',
-                      fillColor: Colors.white,
-                    ),
-                    onChanged: (text) {
-                      BlocProvider.of<TextFormCubit>(context).update(text);
-                      BlocProvider.of<PatientAddCubit>(context).updateID(text);
-                    },
+      body: create_ID(),
+            bottomNavigationBar: bottomNavigator(),
+
+    );
+  }
+}
+
+class create_ID extends StatelessWidget {
+  const create_ID({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => TextFormCubit(),
+      child: BlocBuilder<TextFormCubit, TextFormState>(
+        builder: (context, state) => Column(
+          children: [
+            SizedBox(height: 20),
+            Text(
+              ' Điền id bệnh nhân (10 chữ số):',
+              textScaleFactor: 1.5,
+              textAlign: TextAlign.left,
+            ),
+            Center(
+              child: SizedBox(
+                width: 300.0,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'ID',
                   ),
+                  onChanged: (text) {
+                    BlocProvider.of<TextFormCubit>(context).update(text);
+                    BlocProvider.of<PatientAddCubit>(context).updateID(text);
+                  },
                 ),
               ),
-              Text(
-                  BlocProvider.of<PatientAddCubit>(context).state.patient.name),
-              Text(BlocProvider.of<PatientAddCubit>(context).state.patient.id),
-              ConfirmButton(notice: 'ID'),
-            ],
-          ),
+            ),
+            Text(
+                BlocProvider.of<PatientAddCubit>(context).state.patient.name),
+            Text(BlocProvider.of<PatientAddCubit>(context).state.patient.id),
+            ConfirmButton(notice: 'ID'),
+          ],
         ),
       ),
     );

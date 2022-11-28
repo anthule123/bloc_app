@@ -14,17 +14,22 @@ class bottomNavigator extends StatelessWidget {
       builder: (context, state) {
         return BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Trang chủ',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.medical_services),
+              icon: Image.asset("assets/icons/patient_icon3.png",
+                  height: 50, width: 50),
               label: 'Bệnh nhân',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Image.asset(
+                "assets/icons/doctor_icon2.jpg",
+                height: 50,
+                width: 50,
+              ),
               label: 'Bác sĩ',
             ),
             BottomNavigationBarItem(
@@ -49,28 +54,32 @@ class bottomNavigator extends StatelessWidget {
         {
           BlocProvider.of<NavigatorBarCubit>(context)
               .updateNavigator(NavigatorBarStatus.home);
-          Navigator.of(context, rootNavigator: true).pushNamed('/');
+          Navigator.of(context, rootNavigator: true)
+              .pushNamedAndRemoveUntil('/', (route) => false);
         }
         break;
       case 1:
         {
           BlocProvider.of<NavigatorBarCubit>(context).state.navigatorBarStatus =
               NavigatorBarStatus.patient;
-          Navigator.of(context, rootNavigator: true).pushNamed('/patient');
+          Navigator.of(context, rootNavigator: true)
+              .pushReplacementNamed('/patient');
         }
         break;
       case 2:
         {
           BlocProvider.of<NavigatorBarCubit>(context).state.navigatorBarStatus =
               NavigatorBarStatus.doctor;
-          Navigator.of(context, rootNavigator: true).pushNamed('/doctor');
+          Navigator.of(context, rootNavigator: true)
+              .pushReplacementNamed('/doctor');
         }
         break;
       case 3:
         {
           BlocProvider.of<NavigatorBarCubit>(context).state.navigatorBarStatus =
               NavigatorBarStatus.setting;
-          Navigator.of(context, rootNavigator: true).pushNamed('/setting');
+          Navigator.of(context, rootNavigator: true)
+              .pushReplacementNamed('/setting');
         }
         break;
     }
