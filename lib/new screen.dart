@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import 'presentation/widgets/internet_check_widgets.dart';
+
 class MyWidget extends StatelessWidget {
   const MyWidget({super.key});
 
@@ -12,7 +14,11 @@ class MyWidget extends StatelessWidget {
       appBar: AppBar(
         title: Text('Tên trang'),
       ),
-      body: Column(),
+      body: Column(
+        children: [
+          InternetCheck(),
+        ],
+      ),
       bottomNavigationBar: bottomNavigator(),
     );
   }
