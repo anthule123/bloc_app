@@ -9,9 +9,8 @@ import 'package:nice_buttons/nice_buttons.dart';
 
 import 'package:bloc_app/logic/cubits/internet/internet_cubit.dart';
 
-import '../../logic/cubits/navigator_bar/navigator_bar_cubit.dart';
 import '../widgets/add_patient_icon.dart';
-import '../widgets/bottom_navitgator.dart';
+import '../widgets/bars/bottom_navitgator.dart';
 import '../widgets/create_patient_button.dart';
 import '../widgets/exit_dialog_button.dart';
 import '../widgets/internet_check_widgets.dart';

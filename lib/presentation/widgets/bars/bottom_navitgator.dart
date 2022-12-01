@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../logic/cubits/navigator_bar/navigator_bar_cubit.dart';
+import '../../../logic/bar_cubits/navigator_bar/navigator_bar_cubit.dart';
 
 class bottomNavigator extends StatelessWidget {
   const bottomNavigator({
@@ -41,7 +41,12 @@ class bottomNavigator extends StatelessWidget {
           currentIndex: getIndex(BlocProvider.of<NavigatorBarCubit>(context)
               .state
               .navigatorBarStatus),
-          selectedItemColor: Colors.amber[800],
+          //backgroundColor: Colors.blue.shade100,
+          selectedIconTheme: IconThemeData(
+            color: Colors.green[900],
+          ),
+
+          selectedItemColor: Colors.green[900],
           onTap: (index) => navigate(index, context),
         );
       },

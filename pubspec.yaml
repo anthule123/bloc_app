@@ -49,6 +49,7 @@ dependencies:
   firebase_analytics: ^10.0.2
   firebase_storage: ^11.0.6
   nice_buttons: ^0.0.2
+  salomon_bottom_bar: ^3.3.1
 
 dev_dependencies:
   flutter_test:

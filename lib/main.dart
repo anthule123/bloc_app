@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc_app/logic/cubits/internet/internet_cubit.dart';
-import 'package:bloc_app/logic/cubits/navigator_bar/navigator_bar_cubit.dart';
 import 'package:bloc_app/presentation/router/app_router.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -10,6 +8,10 @@ import 'package:bloc_app/presentation/screens/home_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+
+import 'logic/bar_cubits/doctor_bar/doctor_bar_cubit.dart';
+import 'logic/bar_cubits/navigator_bar/navigator_bar_cubit.dart';
+import 'logic/bar_cubits/patient_bar/patient_bar_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +42,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<NavigatorBarCubit>(
           create: (context) => NavigatorBarCubit(),
         ),
+        BlocProvider<PatientBarCubit>(create: (context) => PatientBarCubit()),
+        BlocProvider<DoctorBarCubit>(create: (context) => DoctorBarCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

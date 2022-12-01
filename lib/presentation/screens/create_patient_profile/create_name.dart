@@ -6,7 +6,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
-import '../../widgets/bottom_navitgator.dart';
+import '../../widgets/bars/bottom_navitgator.dart';
+import '../../widgets/grey_next_button.dart';
 
 class PatientProfileMaking extends StatelessWidget {
   const PatientProfileMaking({super.key});
@@ -69,7 +70,7 @@ class PatientProfileMaking extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: bottomNavigator(),
+      //   bottomNavigationBar: bottomNavigator(),
     );
   }
 }
@@ -91,6 +92,11 @@ class NextButton extends StatelessWidget {
           },
           child: Text('Tiếp tục'));
     else
-      return Text('Bạn cần nhập ${this.notice}.');
+      return Column(
+        children: [
+          Text('Bạn cần nhập ${this.notice}.'),
+          GreyNextButton(),
+        ],
+      );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:bloc_app/logic/cubits/text_form/text_form_cubit.dart';
+import 'package:bloc_app/presentation/screens/create_patient_profile/create_name.dart';
 import 'package:bloc_app/presentation/widgets/exit_dialog_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -7,7 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 import '../../../logic/cubits/patient_add/patient_add_cubit.dart';
-import '../../widgets/bottom_navitgator.dart';
+import '../../widgets/bars/bottom_navitgator.dart';
+import '../../widgets/grey_next_button.dart';
 
 class PatientProfileMakingID extends StatelessWidget {
   const PatientProfileMakingID({super.key});
@@ -19,8 +21,7 @@ class PatientProfileMakingID extends StatelessWidget {
         title: Text('Lập hồ sơ bệnh nhân (ID)'),
       ),
       body: create_ID(),
-            bottomNavigationBar: bottomNavigator(),
-
+      //  bottomNavigationBar: bottomNavigator(),
     );
   }
 }
@@ -58,8 +59,7 @@ class create_ID extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-                BlocProvider.of<PatientAddCubit>(context).state.patient.name),
+            Text(BlocProvider.of<PatientAddCubit>(context).state.patient.name),
             Text(BlocProvider.of<PatientAddCubit>(context).state.patient.id),
             ConfirmButton(notice: 'ID'),
           ],
@@ -82,7 +82,7 @@ class ConfirmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (checkID(BlocProvider.of<TextFormCubit>(context).state.text))
+    if (checkID(BlocProvider.of<TextFormCubit>(context).state.text)) {
       return NiceButtons(
           stretch: false,
           onTap: (finish) {
@@ -92,7 +92,7 @@ class ConfirmButton extends StatelessWidget {
                   var height = MediaQuery.of(context).size.height;
                   var width = MediaQuery.of(context).size.width;
                   return AlertDialog(
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       title: Text('Xác nhận'),
@@ -121,7 +121,12 @@ class ConfirmButton extends StatelessWidget {
                 });
           },
           child: Text('Xác nhận'));
-    else
-      return Text('Bạn cần nhập ${this.notice} gồm 10 kí tự.');
+    } else
+      return Column(
+        children: [
+          Text('Bạn cần nhập ID đủ 10 chữ'),
+          GreyNextButton(),
+        ],
+      );
   }
 }
