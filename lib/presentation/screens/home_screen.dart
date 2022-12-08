@@ -40,8 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           CreatePatientButton(),
         ],
       ),
-      bottomNavigationBar:
-       Builder(builder: homeScreenContext => bottomc) ,
+      bottomNavigationBar: bottomNavigator(),
     );
   }
 }

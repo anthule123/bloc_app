@@ -39,34 +39,21 @@ class PatientScreen extends StatelessWidget {
           ),
           BlocBuilder<NoInsulinCubit, NoInsulinState>(
             builder: ((context, state) {
-              if (BlocProvider.of<NoInsulinCubit>(context)
-                      .state
-                      .medicalStatus ==
-                  MedicalStatus.gettingCHO) {
-                return inputCHO();
-              } else if (BlocProvider.of<NoInsulinCubit>(context)
-                      .state
-                      .medicalStatus ==
-                  MedicalStatus.checkingGlucose) {
-                return inputGlucose();
-              }
-              return GuideInsulin();
-              //     .state
-              //     .medicalStatus)
-              // switch (BlocProvider.of<NoInsulinCubit>(context)
-              //     .state
-              //     .medicalStatus) {
-              //   case MedicalStatus.gettingCHO:
-              //     return inputCHO();
+              switch (BlocProvider.of<NoInsulinCubit>(context)
+                  .state
+                  .medicalStatus) {
+                case MedicalStatus.gettingCHO:
+                  return inputCHO();
 
-              //   case MedicalStatus.checkingGlucose:
-              //     // TODO: Handle this case.
-              //     return inputGlucose();
-              //   case MedicalStatus.guidingInsulin:
-              //     // TODO: Handle this case.
-              //     return GuideInsulin();
-              //   case MedicalStatus.waiting:
-              //     return Column();
+                case MedicalStatus.checkingGlucose:
+                  // TODO: Handle this case.
+                  return inputGlucose();
+                case MedicalStatus.guidingInsulin:
+                  // TODO: Handle this case.
+                  return GuideInsulin();
+                case MedicalStatus.waiting:
+                  return Column();
+              }
             }),
           ),
         ],

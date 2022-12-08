@@ -74,13 +74,13 @@ class CHO_Button extends StatelessWidget {
             BlocProvider.of<TextFormCubit>(context).state.text.toString())) {
           return NiceButtons(
             stretch: false,
-            onTap: (finish) async* {
-              double cho = await double.parse(
+            onTap: (finish)  {
+              double cho =  double.parse(
                   BlocProvider.of<TextFormCubit>(context)
                       .state
                       .text
                       .toString());
-              await BlocProvider.of<NoInsulinCubit>(context)
+              BlocProvider.of<NoInsulinCubit>(context)
                   .getCarbonhydrate(cho);
             },
             child: Text('Tiếp tục'),
