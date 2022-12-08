@@ -1,4 +1,5 @@
 import 'package:bloc_app/logic/cubits/internet/internet_cubit.dart';
+import 'package:bloc_app/logic/no_insulin_cubits/no_insulin_cubit.dart';
 import 'package:bloc_app/presentation/router/app_router.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -33,17 +34,18 @@ class MyApp extends StatelessWidget {
   }) : super(key: key);
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext myAppContext) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<InternetCubit>(
-          create: (context) => InternetCubit(connectivity: connectivity),
+          create: (internetCubitContext) => InternetCubit(connectivity: connectivity),
         ),
         BlocProvider<NavigatorBarCubit>(
-          create: (context) => NavigatorBarCubit(),
+          create: (navigatorBarCubitContext) => NavigatorBarCubit(),
         ),
-        BlocProvider<PatientBarCubit>(create: (context) => PatientBarCubit()),
-        BlocProvider<DoctorBarCubit>(create: (context) => DoctorBarCubit()),
+        BlocProvider<NoInsulinCubit>(create: (noInsulinContext) => NoInsulinCubit()),
+        BlocProvider<PatientBarCubit>(create: (patientBarCubitContext) => PatientBarCubit()),
+        BlocProvider<DoctorBarCubit>(create: (doctorBarCubitContext) => DoctorBarCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

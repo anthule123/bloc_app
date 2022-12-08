@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc_app/logic/cubits/patient_add/patient_add_cubit.dart';
+import 'package:bloc_app/logic/no_insulin_cubits/no_insulin_cubit.dart';
 import 'package:bloc_app/presentation/screens/create_patient_profile/create_name.dart';
 import 'package:bloc_app/presentation/screens/create_patient_profile/create_id.dart';
 import 'package:bloc_app/presentation/screens/create_patient_profile/final_create.dart';
@@ -20,6 +21,7 @@ import '../screens/setting_screens/setting_screen.dart';
 class AppRouter {
   final PatientAddCubit _patientAddCubit = PatientAddCubit();
   final PatientBarCubit _patientBarCubit = PatientBarCubit();
+  //final NoInsulinCubit noInsulinCubit = NoInsulinCubit();
   MaterialPageRoute? onGeneratedRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case ('/'):

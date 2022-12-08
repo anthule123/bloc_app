@@ -30,7 +30,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext homeScreenContext) {
     // setFirebase();
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
@@ -40,7 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
           CreatePatientButton(),
         ],
       ),
-      bottomNavigationBar: bottomNavigator(),
+      bottomNavigationBar:
+       Builder(builder: homeScreenContext => bottomc) ,
     );
   }
 }
