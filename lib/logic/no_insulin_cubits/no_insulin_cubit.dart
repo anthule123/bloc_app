@@ -12,28 +12,26 @@ class NoInsulinCubit extends Cubit<NoInsulinState> {
           regimen: InitialRegimen(),
         ));
 
-  Future<void> getCarbonhydrate(double cho) async {
-    state.currentInsulin =  (cho / 15).round();
-    state.guide =  MedicalTakeInsulin(
+  void getCarbonhydrate(double cho)  {
+    state.currentInsulin = (cho / 15).round();
+    state.guide = MedicalTakeInsulin(
       insulinType: InsulinType.Actrapid,
       time: DateTime.now(),
       insulinUI: state.currentInsulin,
     );
     //Sau khi nhập CHO thì sẽ nhập glucose
     state.medicalStatus = MedicalStatus.checkingGlucose;
-    emit(state);
   }
 
-  Future<void> getGuide() async {
+  void getGuide()  {
     //Thêm action tiêm insulin vào regimen
     state.guide.time = DateTime.now();
     state.regimen.addMedicalAction(state.guide);
     state.medicalStatus = MedicalStatus.gettingCHO;
-    emit(state);
     //Sau khi tiêm xong thì nhập CHO
   }
 
-  Future<void> takeGlucose(double glucose) async {
+  void takeGlucose(double glucose) {
     //Nhận kết quả glucose của bệnh nhân
     MedicalCheckGlucose medicalCheckGlucose = MedicalCheckGlucose(
       time: DateTime.now(),
@@ -53,6 +51,5 @@ class NoInsulinCubit extends Cubit<NoInsulinState> {
     }
     state.guide.insulinUI = state.currentInsulin + state.bonusInsulin;
     state.medicalStatus = MedicalStatus.guidingInsulin;
-    emit(state);
   }
 }
