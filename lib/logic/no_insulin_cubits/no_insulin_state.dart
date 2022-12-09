@@ -9,7 +9,7 @@ enum MedicalStatus {
   waiting,
 }
 
-class NoInsulinState extends Equatable {
+class NoInsulinState  {
   Regimen regimen;
   MedicalTakeInsulin guide;
   int currentInsulin = 0;
@@ -25,15 +25,15 @@ class NoInsulinState extends Equatable {
     this.medicalStatus = MedicalStatus.gettingCHO,
   });
 
-  @override
-  List<Object> get props => [
-        this.regimen,
-        this.guide,
-        this.currentInsulin,
-        this.bonusInsulin,
-        this.notice,
-        this.medicalStatus
-      ];
+  // @override
+  // List<Object> get props => [
+  //       this.regimen,
+  //       this.guide,
+  //       this.currentInsulin,
+  //       this.bonusInsulin,
+  //       this.notice,
+  //       this.medicalStatus
+  //     ];
   NoInsulinState hotClone() {
     return NoInsulinState(
         regimen: regimen,

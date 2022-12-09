@@ -70,8 +70,9 @@ class NoInsulinCubit extends Cubit<NoInsulinState> {
     newState.guide.insulinUI = newState.currentInsulin + newState.bonusInsulin;
     newState.medicalStatus = MedicalStatus.guidingInsulin;
     emit(newState.hotClone());
-    print(newState.medicalStatus.toString() + ' exp');
-    print('a');
-    print(state.medicalStatus.toString() + 'cubit');
+    //debug
+    // print(newState.medicalStatus.toString() + ' exp');
+    // print('a');
+    // print(state.medicalStatus.toString() + 'cubit');
   }
 }
