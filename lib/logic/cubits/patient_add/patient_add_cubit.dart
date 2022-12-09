@@ -10,7 +10,7 @@ import '../../../data/models/patient.dart';
 
 part 'patient_add_state.dart';
 
-enum dataSending { no_send, sending, success, failure }
+enum dataSending {no_send, sending, success, failure, }
 
 class PatientAddCubit extends Cubit<PatientAddState> {
   PatientAddCubit() : super(PatientAddState(patient: Patient()));

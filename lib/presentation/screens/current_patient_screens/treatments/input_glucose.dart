@@ -44,6 +44,10 @@ class inputGlucose extends StatelessWidget {
                   height: 20,
                 ),
                 Glucose_Button(),
+                Text(BlocProvider.of<NoInsulinCubit>(context)
+                    .state
+                    .medicalStatus
+                    .toString()),
               ],
             );
           },
@@ -70,8 +74,9 @@ class Glucose_Button extends StatelessWidget {
         stretch: false,
         onTap: (finish) async {
           double glucose = double.parse(
-            BlocProvider.of<TextFormCubit>(context).state.text.toString());
+              BlocProvider.of<TextFormCubit>(context).state.text.toString());
           BlocProvider.of<NoInsulinCubit>(context).takeGlucose(glucose);
+          //   print(context.read<NoInsulinCubit>().state.medicalStatus);
         },
         child: Text('Tiếp tục'),
       );
@@ -81,6 +86,10 @@ class Glucose_Button extends StatelessWidget {
           Text('Bạn cần điền dưới dạng số'),
           SizedBox(height: 20),
           GreyNextButton(),
+          Text(BlocProvider.of<NoInsulinCubit>(context)
+              .state
+              .medicalStatus
+              .toString()),
         ],
       );
   }

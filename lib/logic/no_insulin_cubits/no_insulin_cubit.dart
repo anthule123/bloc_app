@@ -6,50 +6,72 @@ import '../../data/models/export.dart';
 
 part 'no_insulin_state.dart';
 
+MedicalTakeInsulin InitMedicalTakeInsulin() {
+  return MedicalTakeInsulin(
+      insulinType: InsulinType.Actrapid, time: DateTime.now(), insulinUI: 0);
+}
+
 class NoInsulinCubit extends Cubit<NoInsulinState> {
   NoInsulinCubit()
       : super(NoInsulinState(
           regimen: InitialRegimen(),
+          guide: InitMedicalTakeInsulin(),
         ));
 
-  void getCarbonhydrate(double cho)  {
-    state.currentInsulin = (cho / 15).round();
-    state.guide = MedicalTakeInsulin(
+  void getCarbonhydrate(double cho) {
+    NoInsulinState newState = state.hotClone();
+    newState.currentInsulin = (cho / 15).round();
+    newState.guide = MedicalTakeInsulin(
       insulinType: InsulinType.Actrapid,
       time: DateTime.now(),
-      insulinUI: state.currentInsulin,
+      insulinUI: newState.currentInsulin,
     );
     //Sau khi nhập CHO thì sẽ nhập glucose
-    state.medicalStatus = MedicalStatus.checkingGlucose;
+    newState.medicalStatus = MedicalStatus.checkingGlucose;
+    emit(newState);
+    print(state.medicalStatus.toString() + 'cubit');
   }
 
-  void getGuide()  {
+  void getGuide() {
     //Thêm action tiêm insulin vào regimen
-    state.guide.time = DateTime.now();
-    state.regimen.addMedicalAction(state.guide);
-    state.medicalStatus = MedicalStatus.gettingCHO;
+    NoInsulinState newState = state.hotClone();
+    newState.guide.time = DateTime.now();
+    newState.regimen.addMedicalAction(newState.guide);
+    newState.medicalStatus = MedicalStatus.gettingCHO;
+    emit(newState);
     //Sau khi tiêm xong thì nhập CHO
   }
 
-  void takeGlucose(double glucose) {
+  void newStatus(MedicalStatus medicalStatus) {
+    NoInsulinState newState = state.hotClone();
+    newState.medicalStatus = medicalStatus;
+    emit(newState);
+  }
+
+  void takeGlucose(double glucose) async {
     //Nhận kết quả glucose của bệnh nhân
+    NoInsulinState newState = state.hotClone();
     MedicalCheckGlucose medicalCheckGlucose = MedicalCheckGlucose(
       time: DateTime.now(),
       glucoseUI: glucose,
     );
-    state.regimen.addMedicalAction(medicalCheckGlucose);
+    newState.regimen.addMedicalAction(medicalCheckGlucose);
     if (3.9 <= glucose && glucose <= 8.3) {
-      state.notice = 'Duy trì ${state.currentInsulin} UI Actrapid';
+      newState.notice = 'Duy trì ${newState.currentInsulin} UI Actrapid';
     } else if (8.3 <= glucose && glucose <= 11.1) {
-      state.bonusInsulin += 2;
-      state.notice =
-          'Tiêm ${state.currentInsulin + state.bonusInsulin} UI Actrapid';
+      newState.bonusInsulin += 2;
+      newState.notice =
+          'Tiêm ${newState.currentInsulin + newState.bonusInsulin} UI Actrapid';
     } else if (11.1 <= glucose) {
-      state.bonusInsulin += 4;
-      state.notice =
-          'Tiêm ${state.currentInsulin + state.bonusInsulin} UI Actrapid';
+      newState.bonusInsulin += 4;
+      newState.notice =
+          'Tiêm ${newState.currentInsulin + newState.bonusInsulin} UI Actrapid';
     }
-    state.guide.insulinUI = state.currentInsulin + state.bonusInsulin;
-    state.medicalStatus = MedicalStatus.guidingInsulin;
+    newState.guide.insulinUI = newState.currentInsulin + newState.bonusInsulin;
+    newState.medicalStatus = MedicalStatus.guidingInsulin;
+    emit(newState.hotClone());
+    print(newState.medicalStatus.toString() + ' exp');
+    print('a');
+    print(state.medicalStatus.toString() + 'cubit');
   }
 }
