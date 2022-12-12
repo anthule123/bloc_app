@@ -21,7 +21,7 @@ class inputCHO extends StatelessWidget {
       ),
       BlocProvider(
         create: (_) => TextFormCubit(),
-        child: BlocBuilder<TextFormCubit, TextFormState>(
+        child: BlocBuilder<TextFormCubit, String>(
           builder: (context, state) {
             return Column(
               children: [
@@ -70,15 +70,12 @@ class CHO_Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NoInsulinCubit, NoInsulinState>(
       builder: ((context, state) {
-        if (checkNum(
-            BlocProvider.of<TextFormCubit>(context).state.text.toString())) {
+        if (checkNum(BlocProvider.of<TextFormCubit>(context).state)) {
           return NiceButtons(
             stretch: false,
             onTap: (finish) {
-              double cho = double.parse(BlocProvider.of<TextFormCubit>(context)
-                  .state
-                  .text
-                  .toString());
+              double cho =
+                  double.parse(BlocProvider.of<TextFormCubit>(context).state);
               BlocProvider.of<NoInsulinCubit>(context).getCarbonhydrate(cho);
             },
             child: Text('Tiếp tục'),

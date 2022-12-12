@@ -10,6 +10,9 @@ Future<DataSending> createPatient(Profile profile) async {
     "id": profile.id,
     "weight": profile.weight.toString(),
   };
+  final statusData = <String, String>{
+    "status": PatientStatus.firstAsk.toString(),
+  };
   var db = FirebaseFirestore.instance;
 
   db
@@ -21,5 +24,10 @@ Future<DataSending> createPatient(Profile profile) async {
       .onError((e, _) {
     return DataSending.failure;
   });
+  db
+      .collection("test_patient")
+      .doc('${profile.id}')
+      .set(statusData)
+      .onError((error, stackTrace) => DataSending.failure);
   return DataSending.success;
 }

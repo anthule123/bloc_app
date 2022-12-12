@@ -24,7 +24,7 @@ class PatientProfileMakingWeight extends StatelessWidget {
             create: (_) => TextFormCubit(),
           ),
         ],
-        child: BlocBuilder<TextFormCubit, TextFormState>(
+        child: BlocBuilder<TextFormCubit, String>(
           builder: (context, state) => Column(
             children: [
               SizedBox(height: 20),
@@ -79,12 +79,12 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (checkNum(BlocProvider.of<TextFormCubit>(context).state.text))
+    if (checkNum(BlocProvider.of<TextFormCubit>(context).state))
       return NiceButtons(
           stretch: false,
           onTap: (finish) {
             double weight = double.parse(
-                BlocProvider.of<TextFormCubit>(context).state.text);
+                BlocProvider.of<TextFormCubit>(context).state);
             BlocProvider.of<PatientCreationCubit>(context).updateWeight(weight);
             Navigator.of(context).popAndPushNamed('/profileMakingID');
           },

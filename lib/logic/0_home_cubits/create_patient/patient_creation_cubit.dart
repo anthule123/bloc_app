@@ -21,6 +21,7 @@ class PatientCreationCubit extends Cubit<PatientCreationState> {
     newState.profile.name = newName;
     emit(newState);
   }
+
   void updateWeight(double weight) {
     PatientCreationState newState = state.hotClone();
     newState.profile.weight = weight;
@@ -29,6 +30,7 @@ class PatientCreationCubit extends Cubit<PatientCreationState> {
 
   Future<void> sendData() async {
     PatientCreationState newState = state.hotClone();
+
     newState.dataSending = await createPatient(state.profile);
     emit(newState);
   }

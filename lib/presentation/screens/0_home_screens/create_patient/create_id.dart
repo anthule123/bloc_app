@@ -36,7 +36,7 @@ class create_ID extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => TextFormCubit(),
-      child: BlocBuilder<TextFormCubit, TextFormState>(
+      child: BlocBuilder<TextFormCubit, String>(
         builder: (context, state) => Column(
           children: [
             SizedBox(height: 20),
@@ -90,7 +90,7 @@ class ConfirmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (checkID(BlocProvider.of<TextFormCubit>(context).state.text)) {
+    if (checkID(BlocProvider.of<TextFormCubit>(context).state)) {
       return NiceButtons(
           stretch: false,
           onTap: (finish) {

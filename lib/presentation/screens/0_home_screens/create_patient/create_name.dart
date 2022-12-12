@@ -22,7 +22,7 @@ class PatientProfileMaking extends StatelessWidget {
             create: (_) => TextFormCubit(),
           ),
         ],
-        child: BlocBuilder<TextFormCubit, TextFormState>(
+        child: BlocBuilder<TextFormCubit, String>(
           builder: (context, state) => Column(
             children: [
               SizedBox(height: 20),
@@ -48,14 +48,6 @@ class PatientProfileMaking extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(BlocProvider.of<PatientCreationCubit>(context)
-                  .state
-                  .profile
-                  .name),
-              Text(BlocProvider.of<PatientCreationCubit>(context)
-                  .state
-                  .profile
-                  .id),
               NextButton(
                 notice: 'họ và tên',
               ),
@@ -77,7 +69,7 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (BlocProvider.of<TextFormCubit>(context).state.text != '')
+    if (BlocProvider.of<TextFormCubit>(context).state != '')
       return NiceButtons(
           stretch: false,
           onTap: (finish) {

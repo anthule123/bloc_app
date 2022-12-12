@@ -16,7 +16,7 @@ class GuideInsulin extends StatelessWidget {
     return Column(children: [
       BlocProvider(
         create: (_) => TextFormCubit(),
-        child: BlocBuilder<TextFormCubit, TextFormState>(
+        child: BlocBuilder<TextFormCubit, String>(
           builder: (context, state) {
             return Center(
               child: Column(

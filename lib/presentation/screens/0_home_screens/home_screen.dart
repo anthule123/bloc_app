@@ -1,3 +1,4 @@
+import 'package:bloc_app/presentation/screens/0_home_screens/choose_patient.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/export_widgets.dart';
 
@@ -22,9 +23,14 @@ class HomeScreen extends StatelessWidget {
         children: <Widget>[
           InternetCheck(),
           CreatePatientButton(),
+          ChoosePatientAction(),   
         ],
       ),
       bottomNavigationBar: BottomNavigatorBar(),
     );
   }
 }
+
+
+
+

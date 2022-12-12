@@ -28,7 +28,7 @@ class FinalCreatePatient extends StatelessWidget {
                 return Text('Đang gửi hồ sơ đến Firebase.');
               case DataSending.success:
                 return Text('Hồ sơ này được cập nhật thành công');
-              case DataSending.failure:
+              case DataSending.no_send:
                 return Text('Hồ sơ này chưa được gửi lên');
               default:
                 return Text('Có lỗi xảy ra');

@@ -21,7 +21,7 @@ class inputGlucose extends StatelessWidget {
       ),
       BlocProvider(
         create: (_) => TextFormCubit(),
-        child: BlocBuilder<TextFormCubit, TextFormState>(
+        child: BlocBuilder<TextFormCubit, String>(
           builder: (context, state) {
             return Column(
               children: [
@@ -69,12 +69,12 @@ class Glucose_Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (checkNum(
-        BlocProvider.of<TextFormCubit>(context).state.text.toString())) {
+        BlocProvider.of<TextFormCubit>(context).state)) {
       return NiceButtons(
         stretch: false,
         onTap: (finish) async {
           double glucose = double.parse(
-              BlocProvider.of<TextFormCubit>(context).state.text.toString());
+              BlocProvider.of<TextFormCubit>(context).state);
           BlocProvider.of<NoInsulinCubit>(context).takeGlucose(glucose);
           //   print(context.read<NoInsulinCubit>().state.medicalStatus);
         },
