@@ -7,7 +7,7 @@ Future<bool> checkExistedID(String id) async {
   // Firebase.initializeApp();
   if (id == '') return false;
   var db = FirebaseFirestore.instance;
-  var docRef = db.collection('test_patient').doc(id);
+  var docRef = db.collection('test_patient').doc('${id}');
   bool ans = true;
   final snap = await docRef.get().then(
     (DocumentSnapshot doc) {

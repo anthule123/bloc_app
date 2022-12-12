@@ -1,4 +1,5 @@
 import 'package:bloc_app/data/data_providers/home/check_existed_id.dart';
+import 'package:bloc_app/logic/0_home_cubits/choose_patient/check_existed_id_cubit.dart';
 import 'package:bloc_app/logic/0_home_cubits/choose_patient/choose_patient_cubit.dart';
 import 'package:bloc_app/logic/one_shot_cubits/text_form/text_form_cubit.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,6 +26,9 @@ class ChoosePatientAction extends StatelessWidget {
             BlocProvider(
               create: (_) => TextFormCubit(),
             ),
+            BlocProvider(
+              create: (_) => CheckExistedIDCubit(),
+            )
           ],
           child: BlocBuilder<TextFormCubit, String>(
             builder: (context, state) {
@@ -41,11 +45,20 @@ class ChoosePatientAction extends StatelessWidget {
                         ),
                         onChanged: (text) {
                           BlocProvider.of<TextFormCubit>(context).update(text);
+                          BlocProvider.of<CheckExistedIDCubit>(context)
+                              .check(text);
                         },
                       ),
                     ),
                   ),
-                  PickerPatientButton(),
+                  BlocBuilder<CheckExistedIDCubit, bool>(
+                      builder: (context, state) {
+                    if (state == true) {
+                      return PickerPatientButton();
+                    } else
+                      return Text('ID nay ko hop le');
+                  }),
+                  // PickerPatientButton(),
                   Text(BlocProvider.of<TextFormCubit>(context).state),
                 ],
               );
@@ -75,17 +88,18 @@ class PickerPatientButton extends StatelessWidget {
           listener: (context, state) {},
           builder: (context, state) {
             String id = context.read<TextFormCubit>().state;
-            BlocProvider.of<ChoosePatientCubit>(context).checkNewID(id);
-            switch (BlocProvider.of<ChoosePatientCubit>(context)
-                .state
-                .choosePatientTemp) {
-              case ChoosePatientTemp.accepted:
-                return Text('OK');
-              case ChoosePatientTemp.rejected:
-                return Text('ID nay ko hop le');
-              default:
-                return Text('bo tay');
-            }
+
+            return Column(
+              children: [
+                //Text('ID nay hop le'),
+                IconButton(
+                  onPressed: () {
+                    BlocProvider.of<ChoosePatientCubit>(context).updateID(id);
+                  },
+                  icon: Icon(Icons.back_hand_rounded),
+                ),
+              ],
+            );
           },
         ),
       ],
