@@ -14,7 +14,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext homeScreenContext) {
     // setFirebase();
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        title: Text(title),
+        automaticallyImplyLeading: false,
+      ),
       body: Column(
         children: <Widget>[
           InternetCheck(),

@@ -16,7 +16,7 @@ class PatientProfileMakingWeight extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Lập hồ sơ bệnh nhân'),
-        automaticallyImplyLeading: false,
+        //    automaticallyImplyLeading: false,
       ),
       body: MultiBlocProvider(
         providers: [
@@ -86,8 +86,7 @@ class NextButton extends StatelessWidget {
             double weight = double.parse(
                 BlocProvider.of<TextFormCubit>(context).state.text);
             BlocProvider.of<PatientCreationCubit>(context).updateWeight(weight);
-            Navigator.of(context, rootNavigator: true)
-                .pushReplacementNamed('/profileMakingID');
+            Navigator.of(context).popAndPushNamed('/profileMakingID');
           },
           child: Text('Tiếp tục'));
     else

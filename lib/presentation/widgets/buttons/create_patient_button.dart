@@ -35,7 +35,7 @@ class CreatePatientButton extends StatelessWidget {
                         gradientOrientation: GradientOrientation.Horizontal,
                         onTap: (finish) {
                           Navigator.of(context)
-                              .pushReplacementNamed('/profileMaking');
+                              .popAndPushNamed('/profileMaking');
                         },
                         child: Text('Tạo hồ sơ'),
                       ),

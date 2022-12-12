@@ -19,7 +19,7 @@ class PatientProfileMakingID extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Lập hồ sơ bệnh nhân (ID)'),
-        automaticallyImplyLeading: false,
+        //automaticallyImplyLeading: false,
       ),
       body: create_ID(),
       //  bottomNavigationBar: bottomNavigator(),
@@ -113,9 +113,9 @@ class ConfirmButton extends StatelessWidget {
                             NiceButtons(
                                 stretch: false,
                                 onTap: (finish) {
+                                  Navigator.of(context,rootNavigator: true).pop();
                                   Navigator.of(context, rootNavigator: true)
-                                      .pushReplacementNamed(
-                                          '/profileMakingFinal');
+                                      .popAndPushNamed('/profileMakingFinal');
                                 },
                                 child: Text('Đúng rồi!')),
                             SizedBox(

@@ -15,7 +15,6 @@ class PatientProfileMaking extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Lập hồ sơ bệnh nhân'),
-        automaticallyImplyLeading: false,
       ),
       body: MultiBlocProvider(
         providers: [
@@ -83,7 +82,7 @@ class NextButton extends StatelessWidget {
           stretch: false,
           onTap: (finish) {
             Navigator.of(context, rootNavigator: true)
-                .pushReplacementNamed('/profileMakingWeight');
+                .popAndPushNamed('/profileMakingWeight');
           },
           child: Text('Tiếp tục'));
     else
