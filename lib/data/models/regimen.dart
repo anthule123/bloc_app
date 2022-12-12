@@ -5,7 +5,7 @@ import 'export.dart';
 
 List<dynamic> dylist = [];
 
-class Regimen extends Equatable {
+class Regimen{
   double? currentInsulin = 5;
   List<dynamic> medicalActions;
   List<MedicalCheckGlucose> medicalCheckGlucoses;
@@ -41,13 +41,13 @@ class Regimen extends Equatable {
     return 'Regimen ${medicalActions_str}';
   }
 
-  @override
-  List<Object?> get props => [
-        this.medicalActions,
-        this.medicalCheckGlucoses,
-        this.medicalTakeInsulins,
-        this.currentInsulin,
-      ];
+  // @override
+  // List<Object?> get props => [
+  //       this.medicalActions,
+  //       this.medicalCheckGlucoses,
+  //       this.medicalTakeInsulins,
+  //       this.currentInsulin,
+  //     ];
   Regimen clone() {
     return Regimen(
       medicalActions: [for (dynamic x in medicalActions) x.clone()],
@@ -62,18 +62,7 @@ class Regimen extends Equatable {
   }
 }
 
-// Regimen InitialRegimen() {
-//   List medicalActions = <dynamic>[];
-//   List<MedicalCheckGlucose> medicalCheckGlucoses = <MedicalCheckGlucose>[];
-//   List<MedicalTakeInsulin> medicalTakeInsulins = <MedicalTakeInsulin>[];
-//   return Regimen(
-//     medicalActions: [...medicalActions],
-//     medicalCheckGlucoses: [...medicalCheckGlucoses],
-//     medicalTakeInsulins: [...medicalTakeInsulins],
-//   );
-// }
-
-Regimen InitialRegimen() {
+Regimen initialRegimen() {
   return Regimen(
     medicalActions: [],
     medicalCheckGlucoses: [],

@@ -1,15 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
-class MedicalAction extends Equatable {
+class MedicalAction {
   DateTime time;
+
   MedicalAction({
     required this.time,
   });
 
-  @override
-  // TODO: implement props
-  List<Object?> get props => [this.time];
+  // @override
+  // // TODO: implement props
+  // List<Object?> get props => [this.time];
 
   @override
   String toString() {
@@ -20,4 +21,3 @@ class MedicalAction extends Equatable {
     return MedicalAction(time: this.time);
   }
 }
-

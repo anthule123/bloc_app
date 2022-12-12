@@ -1,21 +1,23 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:equatable/equatable.dart';
+import 'package:bloc_app/data/models/profile.dart';
+import 'package:bloc_app/data/models/regimen.dart';
 
-class Patient extends Equatable {
-  String id;
-  String name;
+enum PatientStatus {
+  firstAsk,
+  noInsulin,
+  yesInsulin,
+  highInsulin,
+  finish,
+}
+
+class Patient {
+  Profile profile;
+  List<Regimen> oldRegimens;
+  PatientStatus patientStatus;
+  dynamic currentRegimenState;
   Patient({
-    this.id = 'Unknown',
-    this.name = 'Unknown',
+    required this.profile,
+    required this.oldRegimens,
+    this.patientStatus = PatientStatus.firstAsk,
   });
-  Patient copy() {
-    return Patient(
-      id: this.id,
-      name: this.name,
-    );
-  }
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [this.id, this.name];
 }

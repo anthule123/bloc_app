@@ -1,29 +1,32 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bloc_app/logic/bar_cubits/navigator_bar_cubit.dart';
 import 'package:bloc_app/logic/cubits/patient_add/patient_add_cubit.dart';
 import 'package:bloc_app/logic/no_insulin_cubits/no_insulin_cubit.dart';
-import 'package:bloc_app/presentation/screens/create_patient_profile/create_name.dart';
-import 'package:bloc_app/presentation/screens/create_patient_profile/create_id.dart';
-import 'package:bloc_app/presentation/screens/create_patient_profile/final_create.dart';
-import 'package:bloc_app/presentation/screens/current_patient_screens/patient_history_screen.dart';
+import 'package:bloc_app/presentation/screens/0_home_screens/create_patient_profile/create_name.dart';
+import 'package:bloc_app/presentation/screens/0_home_screens/create_patient_profile/create_id.dart';
+import 'package:bloc_app/presentation/screens/0_home_screens/create_patient_profile/final_create.dart';
+import 'package:bloc_app/presentation/screens/1_current_patient_screens/patient_history_screen.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../logic/bar_cubits/patient_bar/patient_bar_cubit.dart';
-import '../screens/current_patient_screens/patient_profile_screen.dart';
-import '../screens/current_patient_screens/patient_screen.dart';
-import '../screens/doctor_screens/doctor_profile_screen.dart';
-import '../screens/doctor_screens/doctor_screen.dart';
-import '../screens/home_screen.dart';
-import '../screens/setting_screens/setting_screen.dart';
+import '../screens/1_current_patient_screens/patient_profile_screen.dart';
+import '../screens/1_current_patient_screens/patient_screen.dart';
+import '../screens/2_doctor_screens/doctor_profile_screen.dart';
+import '../screens/2_doctor_screens/doctor_screen.dart';
+import '../screens/0_home_screens/home_screen.dart';
+import '../screens/3_setting_screens/setting_screen.dart';
 
 class AppRouter {
   final PatientAddCubit _patientAddCubit = PatientAddCubit();
-  final PatientBarCubit _patientBarCubit = PatientBarCubit();
-  //final NoInsulinCubit noInsulinCubit = NoInsulinCubit();
+  final PatientNavigatorBarCubit patientNavigatorBarCubit =
+      PatientNavigatorBarCubit();
+  final DoctorNavigatorBarCubit doctorNavigatorBarCubit =
+      DoctorNavigatorBarCubit();
+//final NoInsulinCubit noInsulinCubit = NoInsulinCubit();
   MaterialPageRoute? onGeneratedRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+//home
       case ('/'):
         {
           return MaterialPageRoute(
@@ -60,29 +63,48 @@ class AppRouter {
             ),
           );
         }
-      case ('/doctor'):
-        return MaterialPageRoute(
-          builder: (context) => DoctorScreen(),
-        );
+//patient
       case ('/patient'):
         return MaterialPageRoute(
-          builder: (context) => PatientScreen(),
+          builder: (_) => BlocProvider.value(
+            value: patientNavigatorBarCubit,
+            child: PatientScreen(),
+          ),
         );
-      case ('/setting'):
-        return MaterialPageRoute(
-          builder: (context) => SettingScreen(),
-        );
+
       case ('/patient/profile'):
         return MaterialPageRoute(
-          builder: (context) => PatientProfileScreen(),
+          builder: (_) => BlocProvider.value(
+            value: patientNavigatorBarCubit,
+            child: PatientProfileScreen(),
+          ),
         );
       case ('/patient/history'):
         return MaterialPageRoute(
-          builder: (context) => PatientHistoryScreen(),
+          builder: (_) => BlocProvider.value(
+            value: patientNavigatorBarCubit,
+            child: PatientHistoryScreen(),
+          ),
+        );
+//Doctor
+      case ('/doctor'):
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: doctorNavigatorBarCubit,
+            child: DoctorScreen(),
+          ),
         );
       case ('/doctor/profile'):
         return MaterialPageRoute(
-          builder: (context) => DoctorProfileScreen(),
+          builder: (_) => BlocProvider.value(
+            value: doctorNavigatorBarCubit,
+            child: DoctorProfileScreen(),
+          ),
+        );
+//settings
+      case ('/settings'):
+        return MaterialPageRoute(
+          builder: (context) => SettingScreen(),
         );
       default:
         return null;

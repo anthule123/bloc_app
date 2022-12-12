@@ -16,7 +16,7 @@ class MedicalTakeInsulin extends MedicalAction {
     required this.insulinUI,
   });
 
-  List<Object?> get props => [this.time, this.insulinType, this.insulinUI];
+  //List<Object?> get props => [this.time, this.insulinType, this.insulinUI];
   MedicalTakeInsulin clone() {
     return MedicalTakeInsulin(
       insulinType: insulinType,
