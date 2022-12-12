@@ -1,6 +1,7 @@
-import 'package:bloc_app/logic/cubits/internet/internet_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../logic/one_shot_cubits/internet/internet_cubit.dart';
 
 class InternetCheck extends StatelessWidget {
   const InternetCheck({

@@ -1,5 +1,4 @@
-import 'package:bloc_app/logic/cubits/internet/internet_cubit.dart';
-import 'package:bloc_app/logic/no_insulin_cubits/no_insulin_cubit.dart';
+
 import 'package:bloc_app/presentation/router/app_router.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -9,8 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 
+import 'logic/1_patient_cubits/no_insulin/no_insulin_cubit.dart';
 import 'logic/bar_cubits/navigator_bar_cubit.dart';
-import 'logic/patient_cubits/no_insulin_cubits/no_insulin_cubit.dart';
+import 'logic/one_shot_cubits/internet/internet_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

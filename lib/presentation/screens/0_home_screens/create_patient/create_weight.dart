@@ -1,45 +1,35 @@
-import 'package:bloc_app/logic/cubits/patient_add/patient_add_cubit.dart';
-import 'package:bloc_app/logic/cubits/text_form/text_form_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
-import '../../../widgets/bars/bottom_navitgator_bar.dart';
+import '../../../../logic/0_home_cubits/create_patient/patient_creation_cubit.dart';
+import '../../../../logic/one_shot_cubits/text_form/text_form_cubit.dart';
 import '../../../widgets/buttons/grey_next_button.dart';
+import '../../1_current_patient_screens/treatments/input_cho.dart';
 
-class PatientProfileMaking extends StatelessWidget {
-  const PatientProfileMaking({super.key});
+class PatientProfileMakingWeight extends StatelessWidget {
+  const PatientProfileMakingWeight({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Lập hồ sơ bệnh nhân'),
-        actions: [
-          BackButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
+        automaticallyImplyLeading: false,
       ),
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (_) => TextFormCubit(),
           ),
-          // BlocProvider(
-          //   create: (_) => PatientAddCubit(),
-          // ),
         ],
         child: BlocBuilder<TextFormCubit, TextFormState>(
           builder: (context, state) => Column(
             children: [
               SizedBox(height: 20),
               Text(
-                ' Điền họ tên bệnh nhân:',
+                ' Điền cân nặng bệnh nhân:',
                 textScaleFactor: 1.5,
                 textAlign: TextAlign.left,
               ),
@@ -49,20 +39,25 @@ class PatientProfileMaking extends StatelessWidget {
                   child: TextFormField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Họ và tên',
+                      hintText: 'Cân nặng',
                       fillColor: Colors.white,
                     ),
                     onChanged: (text) {
                       BlocProvider.of<TextFormCubit>(context).update(text);
-                      BlocProvider.of<PatientAddCubit>(context)
-                          .updateName(text);
                     },
                   ),
                 ),
               ),
               Text(
-                  BlocProvider.of<PatientAddCubit>(context).state.patient.name),
-              Text(BlocProvider.of<PatientAddCubit>(context).state.patient.id),
+                BlocProvider.of<PatientCreationCubit>(context)
+                    .state
+                    .profile
+                    .name,
+              ),
+              Text(BlocProvider.of<PatientCreationCubit>(context)
+                  .state
+                  .profile
+                  .id),
               NextButton(
                 notice: 'họ và tên',
               ),
@@ -84,11 +79,15 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (BlocProvider.of<TextFormCubit>(context).state.text != '')
+    if (checkNum(BlocProvider.of<TextFormCubit>(context).state.text))
       return NiceButtons(
           stretch: false,
           onTap: (finish) {
-            Navigator.of(context).pushNamed('/profileMakingID');
+            double weight = double.parse(
+                BlocProvider.of<TextFormCubit>(context).state.text);
+            BlocProvider.of<PatientCreationCubit>(context).updateWeight(weight);
+            Navigator.of(context, rootNavigator: true)
+                .pushReplacementNamed('/profileMakingID');
           },
           child: Text('Tiếp tục'));
     else

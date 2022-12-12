@@ -1,5 +1,4 @@
-import 'package:bloc_app/logic/cubits/text_form/text_form_cubit.dart';
-import 'package:bloc_app/presentation/screens/0_home_screens/create_patient_profile/create_name.dart';
+import 'package:bloc_app/presentation/screens/0_home_screens/create_patient/create_name.dart';
 import 'package:bloc_app/presentation/widgets/buttons/exit_dialog_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -7,7 +6,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
-import '../../../../logic/cubits/patient_add/patient_add_cubit.dart';
+import '../../../../logic/0_home_cubits/create_patient/patient_creation_cubit.dart';
+import '../../../../logic/one_shot_cubits/text_form/text_form_cubit.dart';
 import '../../../widgets/bars/bottom_navitgator_bar.dart';
 import '../../../widgets/buttons/grey_next_button.dart';
 
@@ -19,6 +19,7 @@ class PatientProfileMakingID extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Lập hồ sơ bệnh nhân (ID)'),
+        automaticallyImplyLeading: false,
       ),
       body: create_ID(),
       //  bottomNavigationBar: bottomNavigator(),
@@ -54,13 +55,20 @@ class create_ID extends StatelessWidget {
                   ),
                   onChanged: (text) {
                     BlocProvider.of<TextFormCubit>(context).update(text);
-                    BlocProvider.of<PatientAddCubit>(context).updateID(text);
+                    BlocProvider.of<PatientCreationCubit>(context)
+                        .updateID(text);
                   },
                 ),
               ),
             ),
-            Text(BlocProvider.of<PatientAddCubit>(context).state.patient.name),
-            Text(BlocProvider.of<PatientAddCubit>(context).state.patient.id),
+            Text(BlocProvider.of<PatientCreationCubit>(context)
+                .state
+                .profile
+                .name),
+            Text(BlocProvider.of<PatientCreationCubit>(context)
+                .state
+                .profile
+                .id),
             ConfirmButton(notice: 'ID'),
           ],
         ),
@@ -105,8 +113,9 @@ class ConfirmButton extends StatelessWidget {
                             NiceButtons(
                                 stretch: false,
                                 onTap: (finish) {
-                                  Navigator.of(context)
-                                      .pushNamed('/profileMakingFinal');
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pushReplacementNamed(
+                                          '/profileMakingFinal');
                                 },
                                 child: Text('Đúng rồi!')),
                             SizedBox(

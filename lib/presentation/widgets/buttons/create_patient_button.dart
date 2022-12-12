@@ -33,9 +33,9 @@ class CreatePatientButton extends StatelessWidget {
                         endColor: Colors.green.shade700,
                         progress: false,
                         gradientOrientation: GradientOrientation.Horizontal,
-                        onTap: (finish){
+                        onTap: (finish) {
                           Navigator.of(context)
-                              .pushNamed('/profileMaking');
+                              .pushReplacementNamed('/profileMaking');
                         },
                         child: Text('Tạo hồ sơ'),
                       ),

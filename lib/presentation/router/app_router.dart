@@ -1,15 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc_app/logic/bar_cubits/navigator_bar_cubit.dart';
-import 'package:bloc_app/logic/cubits/patient_add/patient_add_cubit.dart';
-import 'package:bloc_app/logic/no_insulin_cubits/no_insulin_cubit.dart';
-import 'package:bloc_app/presentation/screens/0_home_screens/create_patient_profile/create_name.dart';
-import 'package:bloc_app/presentation/screens/0_home_screens/create_patient_profile/create_id.dart';
-import 'package:bloc_app/presentation/screens/0_home_screens/create_patient_profile/final_create.dart';
+
+import 'package:bloc_app/presentation/screens/0_home_screens/create_patient/create_name.dart';
+import 'package:bloc_app/presentation/screens/0_home_screens/create_patient/create_id.dart';
+import 'package:bloc_app/presentation/screens/0_home_screens/create_patient/final_create.dart';
 import 'package:bloc_app/presentation/screens/1_current_patient_screens/patient_history_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../logic/0_home_cubits/create_patient/patient_creation_cubit.dart';
+import '../screens/0_home_screens/create_patient/create_weight.dart';
 import '../screens/1_current_patient_screens/patient_profile_screen.dart';
 import '../screens/1_current_patient_screens/patient_screen.dart';
 import '../screens/2_doctor_screens/doctor_profile_screen.dart';
@@ -18,7 +19,7 @@ import '../screens/0_home_screens/home_screen.dart';
 import '../screens/3_setting_screens/setting_screen.dart';
 
 class AppRouter {
-  final PatientAddCubit _patientAddCubit = PatientAddCubit();
+  final PatientCreationCubit _patientAddCubit = PatientCreationCubit();
   final PatientNavigatorBarCubit patientNavigatorBarCubit =
       PatientNavigatorBarCubit();
   final DoctorNavigatorBarCubit doctorNavigatorBarCubit =
@@ -42,6 +43,15 @@ class AppRouter {
             builder: (_) => BlocProvider.value(
               value: _patientAddCubit,
               child: PatientProfileMaking(),
+            ),
+          );
+        }
+      case ('/profileMakingWeight'):
+        {
+          return MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+              value: _patientAddCubit,
+              child: PatientProfileMakingWeight(),
             ),
           );
         }

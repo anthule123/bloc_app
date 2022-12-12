@@ -1,7 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:bloc_app/logic/cubits/text_form/text_form_cubit.dart';
-import 'package:bloc_app/logic/no_insulin_cubits/no_insulin_cubit.dart';
 import 'package:bloc_app/presentation/screens/1_current_patient_screens/treatments/guide_insulin.dart';
 import 'package:bloc_app/presentation/screens/1_current_patient_screens/treatments/input_glucose.dart';
 import 'package:bloc_app/presentation/widgets/buttons/grey_next_button.dart';
@@ -11,6 +8,7 @@ import 'package:bloc_app/presentation/widgets/bars/bottom_navitgator_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
+import '../../../logic/1_patient_cubits/no_insulin/no_insulin_cubit.dart';
 import '../../widgets/bars/patient_navigator_bar.dart';
 import 'treatments/input_cho.dart';
 
