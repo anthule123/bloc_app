@@ -65,9 +65,9 @@ class ChoosePatientAction extends StatelessWidget {
             },
           ),
         ),
-        BlocBuilder<ChoosePatientCubit, ChoosePatientState>(
+        BlocBuilder<ChoosePatientCubit, String>(
           builder: (context, state) {
-            return Text('ID hien tai la${state.value}');
+            return Text('ID hien tai la ${state}');
           },
         )
       ],
@@ -84,7 +84,7 @@ class PickerPatientButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BlocConsumer<ChoosePatientCubit, ChoosePatientState>(
+        BlocConsumer<ChoosePatientCubit, String>(
           listener: (context, state) {},
           builder: (context, state) {
             String id = context.read<TextFormCubit>().state;
@@ -94,7 +94,7 @@ class PickerPatientButton extends StatelessWidget {
                 //Text('ID nay hop le'),
                 IconButton(
                   onPressed: () {
-                    BlocProvider.of<ChoosePatientCubit>(context).updateID(id);
+                    BlocProvider.of<ChoosePatientCubit>(context).update(id);
                   },
                   icon: Icon(Icons.back_hand_rounded),
                 ),

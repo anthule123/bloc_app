@@ -1,9 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
+
+import 'package:bloc_app/data/data_providers/patient/get_no_insulin_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+
+import 'package:bloc_app/logic/0_home_cubits/choose_patient/choose_patient_cubit.dart';
+import 'package:bloc/bloc.dart';
 
 import '../../../data/models/export.dart';
-
 
 part 'no_insulin_state.dart';
 
@@ -13,11 +17,24 @@ MedicalTakeInsulin InitMedicalTakeInsulin() {
 }
 
 class NoInsulinCubit extends Cubit<NoInsulinState> {
-  NoInsulinCubit()
-      : super(NoInsulinState(
+  final ChoosePatientCubit choosePatientCubit;
+  StreamSubscription? choosePatientSubscription;
+  NoInsulinCubit({
+    required this.choosePatientCubit,
+  }) : super(NoInsulinState(
           regimen: initialRegimen(),
           guide: InitMedicalTakeInsulin(),
-        ));
+        )) {
+    monitorChoosePatientCubit();
+  }
+  StreamSubscription<String> monitorChoosePatientCubit() {
+    NoInsulinState newState = initNoInsulinState();
+    return choosePatientSubscription =
+        choosePatientCubit.stream.listen((id) async {
+      NoInsulinState newState2 = await getNoInsulin(id);
+      emit(newState2);
+    });
+  }
 
   void getCarbonhydrate(double cho) {
     NoInsulinState newState = state.hotClone();

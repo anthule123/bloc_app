@@ -9,7 +9,7 @@ enum MedicalStatus {
   waiting,
 }
 
-class NoInsulinState  {
+class NoInsulinState {
   Regimen regimen;
   MedicalTakeInsulin guide;
   int currentInsulin = 0;
@@ -43,4 +43,11 @@ class NoInsulinState  {
         notice: notice,
         medicalStatus: medicalStatus);
   }
+}
+
+NoInsulinState initNoInsulinState() {
+  return NoInsulinState(
+    regimen: initialRegimen(),
+    guide: InitMedicalTakeInsulin(),
+  );
 }

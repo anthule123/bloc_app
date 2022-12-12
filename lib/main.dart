@@ -1,4 +1,5 @@
 import 'package:bloc_app/logic/0_home_cubits/choose_patient/choose_patient_cubit.dart';
+import 'package:bloc_app/logic/1_patient_cubits/patient_status/patient_status_cubit.dart';
 import 'package:bloc_app/presentation/router/app_router.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -42,11 +43,20 @@ class MyApp extends StatelessWidget {
         BlocProvider<BottomNavigatorBarCubit>(
           create: (navigatorBarCubitContext) => BottomNavigatorBarCubit(),
         ),
-        BlocProvider<NoInsulinCubit>(
-            create: (noInsulinContext) => NoInsulinCubit()),
         BlocProvider<ChoosePatientCubit>(
           create: (navigatorBarCubitContext) => ChoosePatientCubit(),
         ),
+        BlocProvider<NoInsulinCubit>(
+            create: (noInsulinContext) => NoInsulinCubit(
+                  choosePatientCubit:
+                      BlocProvider.of<ChoosePatientCubit>(noInsulinContext),
+                )),
+        BlocProvider<PatientStatusCubit>(
+          create: (context) => PatientStatusCubit(
+            choosePatientCubit: BlocProvider.of<ChoosePatientCubit>(context),
+          ),
+          child: Container(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
