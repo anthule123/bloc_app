@@ -1,4 +1,3 @@
-
 import 'package:bloc_app/presentation/screens/1_current_patient_screens/treatments/guide_insulin.dart';
 import 'package:bloc_app/presentation/screens/1_current_patient_screens/treatments/input_glucose.dart';
 import 'package:bloc_app/presentation/widgets/buttons/grey_next_button.dart';
@@ -21,9 +20,8 @@ class PatientScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: PatientNavigatorBar(),
+        flexibleSpace: PatientNavigatorBar(),
       ),
-
       body: Column(
         children: [
           BlocBuilder<NoInsulinCubit, NoInsulinState>(

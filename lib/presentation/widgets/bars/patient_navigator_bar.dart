@@ -18,8 +18,7 @@ class PatientNavigatorBar extends StatelessWidget {
             BlocProvider.of<PatientNavigatorBarCubit>(context).update(p0);
             patientNavigator(p0, context);
           },
-          currentIndex:
-              BlocProvider.of<PatientNavigatorBarCubit>(context).state,
+          currentIndex: state,
           items: [
             SalomonBottomBarItem(
                 icon: Icon(Icons.medical_services),
