@@ -11,7 +11,9 @@ class PatientHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: PatientNavigatorBar()),
+      appBar: AppBar(
+        flexibleSpace: PatientNavigatorBar(),
+      ),
       body: Column(),
       bottomNavigationBar: BottomNavigatorBar(),
     );

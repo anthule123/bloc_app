@@ -11,7 +11,7 @@ class DoctorProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: DoctorNavigatorBar(),
+        flexibleSpace: DoctorNavigatorBar(),
       ),
       body: Column(),
       bottomNavigationBar: BottomNavigatorBar(),
