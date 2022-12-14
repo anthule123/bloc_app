@@ -3,13 +3,15 @@ import 'package:bloc/bloc.dart';
 
 import 'package:bloc_app/logic/0_home_cubits/choose_patient/choose_patient_cubit.dart';
 
-enum PatientStatus {
-  firstAsk,
-  noInsulin,
-  yesInsulin,
-  highInsulin,
-  finish,
-}
+import '../../../data/models/patient.dart';
+
+// enum PatientStatus {
+//   firstAsk,
+//   noInsulin,
+//   yesInsulin,
+//   highInsulin,
+//   finish,
+// }
 
 class PatientStatusCubit extends Cubit<PatientStatus> {
   final ChoosePatientCubit choosePatientCubit;

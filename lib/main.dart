@@ -1,5 +1,6 @@
 import 'package:bloc_app/logic/0_home_cubits/choose_patient/choose_patient_cubit.dart';
 import 'package:bloc_app/logic/1_patient_cubits/patient_status/patient_status_cubit.dart';
+import 'package:bloc_app/logic/blocs/timer_bloc.dart';
 import 'package:bloc_app/presentation/router/app_router.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,6 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'logic/1_patient_cubits/no_insulin/no_insulin_cubit.dart';
 import 'logic/bar_cubits/navigator_bar_cubit.dart';
+import 'logic/models/ticker.dart';
 import 'logic/one_shot_cubits/internet/internet_cubit.dart';
 
 void main() async {
@@ -46,6 +48,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<ChoosePatientCubit>(
           create: (navigatorBarCubitContext) => ChoosePatientCubit(),
         ),
+        BlocProvider<TimerBloc>(
+          create: (context) => TimerBloc(ticker: Ticker()),
+        ),
         BlocProvider<NoInsulinCubit>(
             create: (noInsulinContext) => NoInsulinCubit(
                   choosePatientCubit:
@@ -56,7 +61,7 @@ class MyApp extends StatelessWidget {
             choosePatientCubit: BlocProvider.of<ChoosePatientCubit>(context),
           ),
           child: Container(),
-        )
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
