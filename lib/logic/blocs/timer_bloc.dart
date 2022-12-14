@@ -22,11 +22,11 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
 
         /// we have to specify the initial stage
         super(TimerInitial(_duration)) {
-    on<TimerStarted>(_onStarted);
-    on<TimerTicked>(_onTicked);
-    on<TimerPaused>(_onPaused);
-    on<TimerResumed>(_onResumed);
-    on<TimerReset>(_onReset);
+    // on<TimerStarted>(_onStarted);
+    // on<TimerTicked>(_onTicked);
+    // on<TimerPaused>(_onPaused);
+    // on<TimerResumed>(_onResumed);
+    // on<TimerReset>(_onReset);
     // emit(TimerRunInProgress(_duration));
     _tickerSubscription?.cancel();
 
