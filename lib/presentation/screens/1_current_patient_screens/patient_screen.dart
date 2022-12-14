@@ -154,15 +154,15 @@ class TestTime extends StatelessWidget {
     return BlocBuilder<TimerBloc, TimerState>(builder: (context, state) {
       return Row(
         children: [
-          if (state is TimerInitial) ...[
-            FloatingActionButton(
-              child: const Icon(Icons.play_arrow),
+          // if (state is TimerInitial) ...[
+          //   FloatingActionButton(
+          //     child: const Icon(Icons.play_arrow),
 
-              /// changes from current state to TimerStarted state
-              onPressed: () =>
-                  context.read<TimerBloc>().add(TimerStarted(state.duration)),
-            ),
-          ],
+          //     /// changes from current state to TimerStarted state
+          //     onPressed: () =>
+          //         context.read<TimerBloc>().add(TimerStarted(state.duration)),
+          //   ),
+          // ],
           if (inSondeRange(DateTime.now())) ...[Text('OK Time')],
           if (!inSondeRange(DateTime.now())) ...[Text('chưa đến giờ')],
           Text('${DateTime.now()}'),
