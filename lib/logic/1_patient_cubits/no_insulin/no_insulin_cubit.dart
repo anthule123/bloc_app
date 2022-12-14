@@ -79,7 +79,7 @@ class NoInsulinCubit extends Cubit<NoInsulinState> {
     } else if (8.3 <= glucose && glucose <= 11.1) {
       newState.bonusInsulin += 2;
       newState.notice =
-          'Tiêm ${newState.currentInsulin + newState.bonusInsulin} UI Actrapid';
+          'Bổ sung 2 UI insulin Actrapid \n Tiêm ${newState.currentInsulin + newState.bonusInsulin} UI Actrapid';
     } else if (11.1 <= glucose) {
       newState.bonusInsulin += 4;
       newState.notice =

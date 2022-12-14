@@ -1,3 +1,4 @@
+import 'package:bloc_app/data/models/time_controller.dart/sonde_range.dart';
 import 'package:bloc_app/logic/one_shot_cubits/time_check/time_check_cubit.dart';
 import 'package:bloc_app/presentation/screens/1_current_patient_screens/no_insulin/guide_insulin.dart';
 import 'package:bloc_app/presentation/screens/1_current_patient_screens/no_insulin/input_glucose.dart';
@@ -88,6 +89,8 @@ class TestTime extends StatelessWidget {
                   context.read<TimerBloc>().add(TimerStarted(state.duration)),
             ),
           ],
+          if (inSondeRange(DateTime.now())) ...[Text('OK Time')],
+          if (!inSondeRange(DateTime.now())) ...[Text('chưa đến giờ')],
           Text('${DateTime.now()}'),
         ],
       );

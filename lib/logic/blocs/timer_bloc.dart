@@ -21,7 +21,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
       : _ticker = ticker,
 
         /// we have to specify the initial stage
-        super(const TimerInitial(_duration)) {
+        super(TimerInitial(_duration)) {
     on<TimerStarted>(_onStarted);
     on<TimerTicked>(_onTicked);
     on<TimerPaused>(_onPaused);
