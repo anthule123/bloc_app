@@ -31,8 +31,12 @@ class PatientScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          BlocProvider<TimeCheckCubit>(
+            create: (context) => TimeCheckCubit(ticker: secondStream()),
+            child: TestTime2(),
+          ),
           DoctorImage(),
-          TestTime(),
+          // TestTime(),
           BlocBuilder<TimerBloc, TimerState>(
             builder: ((context, state) {
               if (inSondeRange(DateTime.now()))
@@ -144,6 +148,19 @@ class SondeTreatment extends StatelessWidget {
   }
 }
 
+class TestTime2 extends StatelessWidget {
+  const TestTime2({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TimeCheckCubit, DateTime>(builder: (context, state) {
+      return Text('${state}');
+    });
+  }
+}
+
 class TestTime extends StatelessWidget {
   const TestTime({
     Key? key,
@@ -154,15 +171,15 @@ class TestTime extends StatelessWidget {
     return BlocBuilder<TimerBloc, TimerState>(builder: (context, state) {
       return Row(
         children: [
-          // if (state is TimerInitial) ...[
-          //   FloatingActionButton(
-          //     child: const Icon(Icons.play_arrow),
+          if (state is TimerInitial) ...[
+            FloatingActionButton(
+              child: const Icon(Icons.play_arrow),
 
-          //     /// changes from current state to TimerStarted state
-          //     onPressed: () =>
-          //         context.read<TimerBloc>().add(TimerStarted(state.duration)),
-          //   ),
-          // ],
+              /// changes from current state to TimerStarted state
+              onPressed: () =>
+                  context.read<TimerBloc>().add(TimerStarted(state.duration)),
+            ),
+          ],
           if (inSondeRange(DateTime.now())) ...[Text('OK Time')],
           if (!inSondeRange(DateTime.now())) ...[Text('chưa đến giờ')],
           Text('${DateTime.now()}'),
