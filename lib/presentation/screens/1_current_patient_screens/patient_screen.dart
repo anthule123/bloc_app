@@ -31,41 +31,115 @@ class PatientScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          BlocBuilder<PatientStatusCubit, PatientStatus>(
-            builder: (context, state) {
-              if (state == PatientStatus.firstAsk) {
+          DoctorImage(),
+          TestTime(),
+          BlocBuilder<TimerBloc, TimerState>(
+            builder: ((context, state) {
+              if (inSondeRange(DateTime.now()))
                 return Column(
                   children: [
-                    Text('Bn có tiêm insulin ko?'),
-                    TextButton(
-                      onPressed: () {
-                        context
-                            .read<PatientStatusCubit>()
-                            .update(PatientStatus.yesInsulin);
-                      },
-                      child: Text('có'),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        context
-                            .read<PatientStatusCubit>()
-                            .update(PatientStatus.noInsulin);
-                      },
-                      child: Text('không'),
-                    ),
+                    Text('Đến giờ đo'),
+                    SondeTreatment(),
                   ],
                 );
-              } else if (state == PatientStatus.noInsulin)
-                return NoInsulinRepresentation();
               else
-                return Column();
-            },
+                return Text('Chưa đến giờ đo');
+            }),
           ),
-          TestTime(),
         ],
       ),
       // body: top_navigation_bar_patient(),
       bottomNavigationBar: BottomNavigatorBar(),
+    );
+  }
+}
+
+class DoctorImage extends StatelessWidget {
+  const DoctorImage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                color: Colors.white,
+                // width: widthDevideMethod(0.1),
+                // height: heightDevideMethod(0.372),
+              ),
+              SizedBox(
+                  // width: widthDevideMethod(0.7),
+                  child: Image.asset("assets/images/doctor.jpg",
+                      height: 200, width: 200, fit: BoxFit.fitHeight)),
+              Expanded(
+                  child: Container(
+                      //  height:
+                      //   heightDevideMethod(0.372),
+                      color: const Color(0xfff5f6f6))),
+              ResetPatientStatusButton(),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ResetPatientStatusButton extends StatelessWidget {
+  const ResetPatientStatusButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          context.read<PatientStatusCubit>().update(PatientStatus.firstAsk);
+        },
+        icon: Icon(Icons.restart_alt_outlined));
+  }
+}
+
+class SondeTreatment extends StatelessWidget {
+  const SondeTreatment({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PatientStatusCubit, PatientStatus>(
+      builder: (context, state) {
+        if (state == PatientStatus.firstAsk) {
+          return Column(
+            children: [
+              Text('Bn có tiêm insulin ko?'),
+              TextButton(
+                onPressed: () {
+                  context
+                      .read<PatientStatusCubit>()
+                      .update(PatientStatus.yesInsulin);
+                },
+                child: Text('có'),
+              ),
+              TextButton(
+                onPressed: () {
+                  context
+                      .read<PatientStatusCubit>()
+                      .update(PatientStatus.noInsulin);
+                },
+                child: Text('không'),
+              ),
+            ],
+          );
+        } else if (state == PatientStatus.noInsulin)
+          return NoInsulinRepresentation();
+        else
+          return Column();
+      },
     );
   }
 }
