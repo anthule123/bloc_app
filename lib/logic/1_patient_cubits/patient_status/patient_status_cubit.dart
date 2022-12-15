@@ -14,10 +14,7 @@ import '../../../data/models/patient.dart';
 // }
 
 class PatientStatusCubit extends Cubit<PatientStatus> {
-  final ChoosePatientCubit choosePatientCubit;
-  PatientStatusCubit({
-    required this.choosePatientCubit,
-  }) : super(PatientStatus.firstAsk);
+  PatientStatusCubit() : super(PatientStatus.firstAsk);
   void update(PatientStatus newStatus) {
     emit(newStatus);
   }

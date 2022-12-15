@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bloc_app/logic/1_patient_cubits/yes_insulin/yes_insulin_fast/yes_insulin_fast_cubit.dart';
 import 'package:bloc_app/logic/bar_cubits/navigator_bar_cubit.dart';
 
 import 'package:bloc_app/presentation/screens/0_home_screens/create_patient/create_name.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../logic/0_home_cubits/create_patient/patient_creation_cubit.dart';
+import '../../logic/1_patient_cubits/yes_insulin/yes_insulin_slow/yes_insulin_slow_cubit.dart';
 import '../../logic/one_shot_cubits/time_check/time_check_cubit.dart';
 import '../screens/0_home_screens/create_patient/create_weight.dart';
 import '../screens/1_current_patient_screens/patient_profile_screen.dart';
@@ -25,6 +27,8 @@ class AppRouter {
       PatientNavigatorBarCubit();
   final DoctorNavigatorBarCubit doctorNavigatorBarCubit =
       DoctorNavigatorBarCubit();
+  final YesInsulinFastCubit yesInsulinFastCubit = YesInsulinFastCubit();
+  final YesInsulinSlowCubit yesInsulinSlowCubit = YesInsulinSlowCubit();
 //final NoInsulinCubit noInsulinCubit = NoInsulinCubit();
   MaterialPageRoute? onGeneratedRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -81,7 +85,13 @@ class AppRouter {
             value: patientNavigatorBarCubit,
             child: BlocProvider<TimeCheckCubit>(
               create: (context) => TimeCheckCubit(ticker: secondStream()),
-              child: PatientScreen(),
+              child: BlocProvider.value(
+                value: yesInsulinFastCubit,
+                child: BlocProvider.value(
+                  value: yesInsulinSlowCubit,
+                  child: PatientScreen(),
+                ),
+              ),
             ),
           ),
         );

@@ -18,25 +18,12 @@ MedicalTakeInsulin InitMedicalTakeInsulin() {
 
 class NoInsulinCubit extends Cubit<NoInsulinState> {
   int badGlucose = 0;
-  final ChoosePatientCubit choosePatientCubit;
-  StreamSubscription? choosePatientSubscription;
-  NoInsulinCubit({
-    required this.choosePatientCubit,
-  }) : super(NoInsulinState(
+
+  NoInsulinCubit()
+      : super(NoInsulinState(
           regimen: initialRegimen(),
           guide: InitMedicalTakeInsulin(),
-        )) {
-    monitorChoosePatientCubit();
-  }
-  //theo doi id
-  StreamSubscription<String> monitorChoosePatientCubit() {
-    NoInsulinState newState = initNoInsulinState();
-    return choosePatientSubscription =
-        choosePatientCubit.stream.listen((id) async {
-      NoInsulinState newState2 = await getNoInsulin(id);
-      emit(newState2);
-    });
-  }
+        ));
 
   void getCarbonhydrate(double cho) {
     NoInsulinState newState = state.hotClone();
@@ -99,7 +86,7 @@ class NoInsulinCubit extends Cubit<NoInsulinState> {
     int counter = 0;
     int len = state.regimen.medicalCheckGlucoses.length;
     for (int i = len - 1; i >= max(0, len - 8); i--) {
-      if (state.regimen.medicalCheckGlucoses[i].glucoseUI > 5) {
+      if (bad(state.regimen.medicalCheckGlucoses[i].glucoseUI)) {
         counter++;
       }
     }
@@ -117,7 +104,7 @@ class NoInsulinCubit extends Cubit<NoInsulinState> {
 }
 
 bool bad(num glucose) {
-  return (glucose > 5);
+  return (glucose > 8.3 && glucose < 3.9);
 }
 
 bool lowBadGlucose(num glucose) {

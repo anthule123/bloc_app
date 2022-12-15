@@ -5,12 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../logic/1_patient_cubits/no_insulin/no_insulin_cubit.dart';
 import '../../../../../logic/1_patient_cubits/patient_status/patient_status_cubit.dart';
-import 'guide_insulin.dart';
-import 'input_cho.dart';
-import 'input_glucose.dart';
+import '../../../../../logic/1_patient_cubits/yes_insulin/yes_insulin_fast/yes_insulin_fast_cubit.dart';
+import 'yes_fast_guide_insulin.dart';
+import 'yes_fast_input_cho.dart';
+import 'yes_fast_input_glucose.dart';
 
-class NoInsulinRepresentation extends StatelessWidget {
-  const NoInsulinRepresentation({
+class YesInsulinFastRepresentation extends StatelessWidget {
+  const YesInsulinFastRepresentation({
     Key? key,
   }) : super(key: key);
 
@@ -18,35 +19,37 @@ class NoInsulinRepresentation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BlocConsumer<NoInsulinCubit, NoInsulinState>(
+        BlocConsumer<YesInsulinFastCubit, NoInsulinState>(
           listener: (context, state) {
             if (state.goToNextRegimen) {
               context
                   .read<PatientStatusCubit>()
-                  .update(PatientStatus.yesInsulin);
+                  .update(PatientStatus.highInsulin);
             }
           },
           builder: ((context, state) {
-            switch (
-                BlocProvider.of<NoInsulinCubit>(context).state.medicalStatus) {
+            switch (BlocProvider.of<YesInsulinFastCubit>(context)
+                .state
+                .medicalStatus) {
               case MedicalStatus.gettingCHO:
-                return inputCHO();
+                return YesInsulinFastInputCHO();
 
               case MedicalStatus.checkingGlucose:
                 // TODO: Handle this case.
-                return InputGlucose();
+                return YesInsulinFastInputGlucose();
               case MedicalStatus.guidingInsulin:
                 // TODO: Handle this case.
-                return GuideInsulin();
+                return YesInsulinFastGuideInsulin();
               case MedicalStatus.waiting:
                 return Column();
             }
           }),
         ),
-        BlocBuilder<NoInsulinCubit, NoInsulinState>(builder: (context, state) {
+        BlocBuilder<YesInsulinFastCubit, NoInsulinState>(
+            builder: (context, state) {
           return Column(
             children: [
-              Text(context.read<NoInsulinCubit>().badGlucose.toString()),
+              Text(context.read<YesInsulinFastCubit>().badGlucose.toString()),
               Text(state.goToNextRegimen.toString()),
               Text(state.regimen.toString()),
             ],

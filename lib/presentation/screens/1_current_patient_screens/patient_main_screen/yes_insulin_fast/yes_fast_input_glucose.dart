@@ -4,10 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 import '../../../../../logic/1_patient_cubits/no_insulin/no_insulin_cubit.dart';
+import '../../../../../logic/1_patient_cubits/yes_insulin/yes_insulin_fast/yes_insulin_fast_cubit.dart';
 import '../../../../../logic/one_shot_cubits/text_form/text_form_cubit.dart';
 
-class InputGlucose extends StatelessWidget {
-  const InputGlucose({
+class YesInsulinFastInputGlucose extends StatelessWidget {
+  const YesInsulinFastInputGlucose({
     Key? key,
   }) : super(key: key);
 
@@ -43,7 +44,7 @@ class InputGlucose extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Glucose_Button(),
+                YesInsulinFastGlucoseButton(),
                 // Text(BlocProvider.of<NoInsulinCubit>(context)
                 //     .state
                 //     .medicalStatus
@@ -61,8 +62,8 @@ bool checkNum(String text) {
   return double.tryParse(text) != null;
 }
 
-class Glucose_Button extends StatelessWidget {
-  const Glucose_Button({
+class YesInsulinFastGlucoseButton extends StatelessWidget {
+  const YesInsulinFastGlucoseButton({
     Key? key,
   }) : super(key: key);
 
@@ -74,7 +75,7 @@ class Glucose_Button extends StatelessWidget {
         onTap: (finish) async {
           double glucose =
               double.parse(BlocProvider.of<TextFormCubit>(context).state);
-          BlocProvider.of<NoInsulinCubit>(context).takeGlucose(glucose);
+          BlocProvider.of<YesInsulinFastCubit>(context).takeGlucose(glucose);
           //   print(context.read<NoInsulinCubit>().state.medicalStatus);
         },
         child: Text('Tiếp tục'),

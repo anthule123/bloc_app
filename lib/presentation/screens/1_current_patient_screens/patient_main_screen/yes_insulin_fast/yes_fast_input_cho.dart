@@ -4,10 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 import '../../../../../logic/1_patient_cubits/no_insulin/no_insulin_cubit.dart';
+import '../../../../../logic/1_patient_cubits/yes_insulin/yes_insulin_fast/yes_insulin_fast_cubit.dart';
 import '../../../../../logic/one_shot_cubits/text_form/text_form_cubit.dart';
+import '../no_insulin/input_cho.dart';
 
-class InputGlucose extends StatelessWidget {
-  const InputGlucose({
+class YesInsulinFastInputCHO extends StatelessWidget {
+  const YesInsulinFastInputCHO({
     Key? key,
   }) : super(key: key);
 
@@ -15,7 +17,7 @@ class InputGlucose extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Text(
-        'Điền lượng glucose (UI):',
+        'Điền lượng carbonhydrate (g):',
         textScaleFactor: 1.2,
         textAlign: TextAlign.left,
       ),
@@ -43,7 +45,7 @@ class InputGlucose extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Glucose_Button(),
+                YesInsulinFastCHOButton(),
                 // Text(BlocProvider.of<NoInsulinCubit>(context)
                 //     .state
                 //     .medicalStatus
@@ -57,39 +59,36 @@ class InputGlucose extends StatelessWidget {
   }
 }
 
-bool checkNum(String text) {
-  return double.tryParse(text) != null;
-}
 
-class Glucose_Button extends StatelessWidget {
-  const Glucose_Button({
+
+class YesInsulinFastCHOButton extends StatelessWidget {
+  const YesInsulinFastCHOButton({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (checkNum(BlocProvider.of<TextFormCubit>(context).state)) {
-      return NiceButtons(
-        stretch: false,
-        onTap: (finish) async {
-          double glucose =
-              double.parse(BlocProvider.of<TextFormCubit>(context).state);
-          BlocProvider.of<NoInsulinCubit>(context).takeGlucose(glucose);
-          //   print(context.read<NoInsulinCubit>().state.medicalStatus);
-        },
-        child: Text('Tiếp tục'),
-      );
-    } else
-      return Column(
-        children: [
-          Text('Bạn cần điền dưới dạng số'),
-          SizedBox(height: 20),
-          GreyNextButton(),
-          // Text(BlocProvider.of<NoInsulinCubit>(context)
-          //     .state
-          //     .medicalStatus
-          //     .toString()),
-        ],
-      );
+    return BlocBuilder<YesInsulinFastCubit, NoInsulinState>(
+      builder: ((context, state) {
+        if (checkNum(BlocProvider.of<TextFormCubit>(context).state)) {
+          return NiceButtons(
+            stretch: false,
+            onTap: (finish) {
+              double cho =
+                  double.parse(BlocProvider.of<TextFormCubit>(context).state);
+              BlocProvider.of<YesInsulinFastCubit>(context).getCarbonhydrate(cho);
+            },
+            child: Text('Tiếp tục'),
+          );
+        } else
+          return Column(
+            children: [
+              Text('Bạn cần điền dưới dạng số'),
+              SizedBox(height: 20),
+              GreyNextButton(),
+            ],
+          );
+      }),
+    );
   }
 }

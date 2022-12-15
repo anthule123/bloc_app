@@ -47,14 +47,9 @@ class MyApp extends StatelessWidget {
           create: (navigatorBarCubitContext) => ChoosePatientCubit(),
         ),
         BlocProvider<NoInsulinCubit>(
-            create: (noInsulinContext) => NoInsulinCubit(
-                  choosePatientCubit:
-                      BlocProvider.of<ChoosePatientCubit>(noInsulinContext),
-                )),
+            create: (noInsulinContext) => NoInsulinCubit()),
         BlocProvider<PatientStatusCubit>(
-          create: (context) => PatientStatusCubit(
-            choosePatientCubit: BlocProvider.of<ChoosePatientCubit>(context),
-          ),
+          create: (context) => PatientStatusCubit(),
           child: Container(),
         ),
       ],
