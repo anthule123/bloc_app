@@ -1,4 +1,3 @@
-
 class HourMinute {
   int hour;
   int minute;
@@ -21,8 +20,8 @@ class Range {
   HourMinute start;
   HourMinute end;
   Range(
-     this.start,
-     this.end,
+    this.start,
+    this.end,
   );
   @override
   String toString() {
@@ -41,5 +40,11 @@ bool inRange(DateTime t, Range r) {
 
 
 
+bool inRangeToday(DateTime t, Range r) {
+  DateTime today = DateTime.now();
+  bool sameYear = t.year == today.year;
+  bool sameMonth = t.month == today.month;
 
-
+  bool sameDay = t.day == today.day;
+  return sameDay && sameMonth && sameYear && inRange(t, r);
+}

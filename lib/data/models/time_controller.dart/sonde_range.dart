@@ -12,3 +12,18 @@ bool inSondeRange(DateTime t) {
   var result = b.any((element) => element == true);
   return result;
 }
+
+bool inSondeRangeToday(DateTime t) {
+  List<bool> b = [for (int i = 0; i < 4; i++) inRangeToday(t, sondeRange[i])];
+  var result = b.any((element) => element == true);
+  return result;
+}
+
+int? rangeContain(DateTime t) {
+  for (int i = 0; i < 4; i++) {
+    if (inRange(t, sondeRange[i])) {
+      return i;
+    }
+  }
+  return null;
+}

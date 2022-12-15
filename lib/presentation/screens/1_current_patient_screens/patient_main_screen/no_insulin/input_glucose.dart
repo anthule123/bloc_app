@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
-import '../../../../logic/1_patient_cubits/no_insulin/no_insulin_cubit.dart';
-import '../../../../logic/one_shot_cubits/text_form/text_form_cubit.dart';
+import '../../../../../logic/1_patient_cubits/no_insulin/no_insulin_cubit.dart';
+import '../../../../../logic/one_shot_cubits/text_form/text_form_cubit.dart';
 
 class inputGlucose extends StatelessWidget {
   const inputGlucose({
@@ -44,10 +44,10 @@ class inputGlucose extends StatelessWidget {
                   height: 20,
                 ),
                 Glucose_Button(),
-                Text(BlocProvider.of<NoInsulinCubit>(context)
-                    .state
-                    .medicalStatus
-                    .toString()),
+                // Text(BlocProvider.of<NoInsulinCubit>(context)
+                //     .state
+                //     .medicalStatus
+                //     .toString()),
               ],
             );
           },
@@ -68,13 +68,12 @@ class Glucose_Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (checkNum(
-        BlocProvider.of<TextFormCubit>(context).state)) {
+    if (checkNum(BlocProvider.of<TextFormCubit>(context).state)) {
       return NiceButtons(
         stretch: false,
         onTap: (finish) async {
-          double glucose = double.parse(
-              BlocProvider.of<TextFormCubit>(context).state);
+          double glucose =
+              double.parse(BlocProvider.of<TextFormCubit>(context).state);
           BlocProvider.of<NoInsulinCubit>(context).takeGlucose(glucose);
           //   print(context.read<NoInsulinCubit>().state.medicalStatus);
         },
@@ -86,10 +85,10 @@ class Glucose_Button extends StatelessWidget {
           Text('Bạn cần điền dưới dạng số'),
           SizedBox(height: 20),
           GreyNextButton(),
-          Text(BlocProvider.of<NoInsulinCubit>(context)
-              .state
-              .medicalStatus
-              .toString()),
+          // Text(BlocProvider.of<NoInsulinCubit>(context)
+          //     .state
+          //     .medicalStatus
+          //     .toString()),
         ],
       );
   }

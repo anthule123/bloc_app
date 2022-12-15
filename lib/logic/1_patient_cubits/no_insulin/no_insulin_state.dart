@@ -16,6 +16,8 @@ class NoInsulinState {
   int bonusInsulin = 0;
   String notice = '';
   MedicalStatus medicalStatus = MedicalStatus.gettingCHO;
+  int badGlucose = 0;
+  bool goToNextRegimen = false;
   NoInsulinState({
     required this.regimen,
     required this.guide,
@@ -23,6 +25,8 @@ class NoInsulinState {
     this.bonusInsulin = 0,
     this.notice = '',
     this.medicalStatus = MedicalStatus.gettingCHO,
+    this.badGlucose = 0,
+    this.goToNextRegimen = false,
   });
 
   // @override
@@ -36,12 +40,15 @@ class NoInsulinState {
   //     ];
   NoInsulinState hotClone() {
     return NoInsulinState(
-        regimen: regimen,
-        guide: guide,
-        currentInsulin: currentInsulin,
-        bonusInsulin: bonusInsulin,
-        notice: notice,
-        medicalStatus: medicalStatus);
+      regimen: regimen,
+      guide: guide,
+      currentInsulin: currentInsulin,
+      bonusInsulin: bonusInsulin,
+      notice: notice,
+      medicalStatus: medicalStatus,
+      badGlucose: badGlucose,
+      goToNextRegimen: goToNextRegimen,
+    );
   }
 }
 

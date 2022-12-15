@@ -10,9 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../logic/0_home_cubits/create_patient/patient_creation_cubit.dart';
+import '../../logic/one_shot_cubits/time_check/time_check_cubit.dart';
 import '../screens/0_home_screens/create_patient/create_weight.dart';
 import '../screens/1_current_patient_screens/patient_profile_screen.dart';
-import '../screens/1_current_patient_screens/patient_screen.dart';
+import '../screens/1_current_patient_screens/patient_main_screen/patient_screen.dart';
 import '../screens/2_doctor_screens/doctor_profile_screen.dart';
 import '../screens/2_doctor_screens/doctor_screen.dart';
 import '../screens/0_home_screens/home_screen.dart';
@@ -78,7 +79,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
             value: patientNavigatorBarCubit,
-            child: PatientScreen(),
+            child: BlocProvider<TimeCheckCubit>(
+              create: (context) => TimeCheckCubit(ticker: secondStream()),
+              child: PatientScreen(),
+            ),
           ),
         );
 

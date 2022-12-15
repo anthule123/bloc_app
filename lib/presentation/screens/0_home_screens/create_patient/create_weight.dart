@@ -6,7 +6,7 @@ import 'package:nice_buttons/nice_buttons.dart';
 import '../../../../logic/0_home_cubits/create_patient/patient_creation_cubit.dart';
 import '../../../../logic/one_shot_cubits/text_form/text_form_cubit.dart';
 import '../../../widgets/buttons/grey_next_button.dart';
-import '../../1_current_patient_screens/no_insulin/input_cho.dart';
+import '../../1_current_patient_screens/patient_main_screen/no_insulin/input_cho.dart';
 
 class PatientProfileMakingWeight extends StatelessWidget {
   const PatientProfileMakingWeight({super.key});

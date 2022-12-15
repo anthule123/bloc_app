@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
-import '../../../../logic/1_patient_cubits/no_insulin/no_insulin_cubit.dart';
-import '../../../../logic/one_shot_cubits/text_form/text_form_cubit.dart';
+import '../../../../../logic/1_patient_cubits/no_insulin/no_insulin_cubit.dart';
+import '../../../../../logic/one_shot_cubits/text_form/text_form_cubit.dart';
 
 class inputCHO extends StatelessWidget {
   const inputCHO({
@@ -44,10 +44,10 @@ class inputCHO extends StatelessWidget {
                   height: 20,
                 ),
                 CHO_Button(),
-                Text(BlocProvider.of<NoInsulinCubit>(context)
-                    .state
-                    .medicalStatus
-                    .toString()),
+                // Text(BlocProvider.of<NoInsulinCubit>(context)
+                //     .state
+                //     .medicalStatus
+                //     .toString()),
               ],
             );
           },

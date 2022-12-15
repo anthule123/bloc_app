@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
-
+import 'dart:math';
 import 'package:bloc_app/data/data_providers/patient/get_no_insulin_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +17,7 @@ MedicalTakeInsulin InitMedicalTakeInsulin() {
 }
 
 class NoInsulinCubit extends Cubit<NoInsulinState> {
+  int badGlucose = 0;
   final ChoosePatientCubit choosePatientCubit;
   StreamSubscription? choosePatientSubscription;
   NoInsulinCubit({
@@ -27,6 +28,7 @@ class NoInsulinCubit extends Cubit<NoInsulinState> {
         )) {
     monitorChoosePatientCubit();
   }
+  //theo doi id
   StreamSubscription<String> monitorChoosePatientCubit() {
     NoInsulinState newState = initNoInsulinState();
     return choosePatientSubscription =
@@ -47,7 +49,6 @@ class NoInsulinCubit extends Cubit<NoInsulinState> {
     //Sau khi nhập CHO thì sẽ nhập glucose
     newState.medicalStatus = MedicalStatus.checkingGlucose;
     emit(newState);
-    print(state.medicalStatus.toString() + 'cubit');
   }
 
   void getGuide() {
@@ -55,6 +56,7 @@ class NoInsulinCubit extends Cubit<NoInsulinState> {
     NoInsulinState newState = state.hotClone();
     newState.guide.time = DateTime.now();
     newState.regimen.addMedicalAction(newState.guide);
+    updateGoToNextRegimen();
     newState.medicalStatus = MedicalStatus.checkingGlucose;
     emit(newState);
     //Sau khi tiêm xong thì nhập CHO
@@ -74,23 +76,58 @@ class NoInsulinCubit extends Cubit<NoInsulinState> {
       glucoseUI: glucose,
     );
     newState.regimen.addMedicalAction(medicalCheckGlucose);
-    if (3.9 <= glucose && glucose <= 8.3) {
+
+    if (lowBadGlucose(glucose)) {
       newState.notice = 'Duy trì ${newState.currentInsulin} UI Actrapid';
-    } else if (8.3 <= glucose && glucose <= 11.1) {
+    } else if (mediumBadGlucose(glucose)) {
       newState.bonusInsulin += 2;
       newState.notice =
           'Bổ sung 2 UI insulin Actrapid \n Tiêm ${newState.currentInsulin + newState.bonusInsulin} UI Actrapid';
-    } else if (11.1 <= glucose) {
+    } else if (highBadGlucose(glucose)) {
       newState.bonusInsulin += 4;
       newState.notice =
-          'Tiêm ${newState.currentInsulin + newState.bonusInsulin} UI Actrapid';
+          'Bổ sung 4 UI insulin Actrapid \n Tiêm ${newState.currentInsulin + newState.bonusInsulin} UI Actrapid';
     }
     newState.guide.insulinUI = newState.currentInsulin + newState.bonusInsulin;
     newState.medicalStatus = MedicalStatus.guidingInsulin;
     emit(newState);
-    //debug
-    // print(newState.medicalStatus.toString() + ' exp');
-    // print('a');
-    // print(state.medicalStatus.toString() + 'cubit');
+    updateBadGlucose(glucose);
   }
+
+  //Cac ham phu: update badGlucose và update goToNextRegimen
+  void updateBadGlucose(num glucose) {
+    int counter = 0;
+    int len = state.regimen.medicalCheckGlucoses.length;
+    for (int i = len - 1; i >= max(0, len - 8); i--) {
+      if (state.regimen.medicalCheckGlucoses[i].glucoseUI > 5) {
+        counter++;
+      }
+    }
+    print('hello');
+    badGlucose = counter;
+  }
+
+  void updateGoToNextRegimen() {
+    dynamic newState = state.hotClone();
+    if (badGlucose >= 5) {
+      newState.goToNextRegimen = true;
+    }
+    emit(newState);
+  }
+}
+
+bool bad(num glucose) {
+  return (glucose > 5);
+}
+
+bool lowBadGlucose(num glucose) {
+  return 3.9 <= glucose && glucose <= 8.3;
+}
+
+bool mediumBadGlucose(num glucose) {
+  return 8.3 <= glucose && glucose <= 11.1;
+}
+
+bool highBadGlucose(num glucose) {
+  return 11.1 < glucose;
 }
