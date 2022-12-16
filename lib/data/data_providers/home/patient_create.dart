@@ -5,10 +5,10 @@ import '../../models/export.dart';
 
 Future<DataSending> createPatient(Profile profile) async {
   // Firebase.initializeApp();
-  final data = <String, String>{
+  final data = <String, dynamic>{
     "name": profile.name,
     "id": profile.id,
-    "weight": profile.weight.toString(),
+    "weight": profile.weight,
   };
   final statusData = <String, String>{
     "status": PatientStatus.firstAsk.toString(),

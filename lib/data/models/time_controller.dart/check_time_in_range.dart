@@ -9,6 +9,13 @@ class HourMinute {
   String toString() {
     return '$hour:$minute';
   }
+
+  @override
+  bool operator <(HourMinute other) {
+    // compare this to other
+    return hour < other.hour ||
+     (hour == other.hour && minute < other.minute);
+  }
 }
 
 HourMinute simple(String hm) {
@@ -37,8 +44,6 @@ bool inRange(DateTime t, Range r) {
   DateTime end = DateTime(year, month, day, r.end.hour, r.end.minute);
   return start.isBefore(t) && t.isBefore(end);
 }
-
-
 
 bool inRangeToday(DateTime t, Range r) {
   DateTime today = DateTime.now();

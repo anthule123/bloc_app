@@ -13,7 +13,7 @@ Future<bool> checkExistedID(String id) async {
     (DocumentSnapshot doc) {
       final data = doc.data();
       print(data.runtimeType);
-      print(data);
+      (data);
       if (data.runtimeType == Null) {
         ans = false;
         // return false;

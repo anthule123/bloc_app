@@ -27,3 +27,13 @@ int? rangeContain(DateTime t) {
   }
   return null;
 }
+
+int? nextRange(DateTime t) {
+  HourMinute hm = HourMinute(t.hour, t.minute);
+  for (int i = 0; i < 4; i++) {
+    if (hm < sondeRange[i].start) {
+      return i;
+    }
+  }
+  return null;
+}
