@@ -28,12 +28,19 @@ int? rangeContain(DateTime t) {
   return null;
 }
 
-int? nextRange(DateTime t) {
+int nextRange(DateTime t) {
   HourMinute hm = HourMinute(t.hour, t.minute);
   for (int i = 0; i < 4; i++) {
     if (hm < sondeRange[i].start) {
       return i;
     }
   }
-  return null;
+  return 0;
+}
+
+String waitingMessage(DateTime t) {
+  int index_next_range = nextRange(t);
+  int h = sondeRange[index_next_range].start.hour;
+  int m = sondeRange[index_next_range].start.hour;
+  return 'Bạn phải đợi đến $h: $m cho lần đo tiếp theo.';
 }
