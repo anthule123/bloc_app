@@ -37,7 +37,6 @@ class PatientScreen extends StatelessWidget {
                       return Column(
                         children: [
                           Text(DateTime.now().toString()),
-                          Text('OK'),
                           PatientStatusLayer(),
                         ],
                       );

@@ -25,7 +25,15 @@ class PatientStatusLayer extends StatelessWidget {
       children: [
         BlocBuilder<PatientStatusCubit, PatientStatus>(
             builder: (context, state) {
-          return Text('${state}');
+          // return Text('${state}');
+          switch (state) {
+            case PatientStatus.noInsulin:
+              return Text("Lộ trình không tiêm Insulin:");
+            case PatientStatus.yesInsulin:
+              return Text("Lộ trình đang tiêm Insulin:");
+            default:
+              return Text("");
+          }
         }),
         BlocBuilder<PatientStatusCubit, PatientStatus>(
           builder: (context, state) {
@@ -71,12 +79,12 @@ class YesInsulinSlowUI extends StatelessWidget {
           case YesInsulinSlowStatus.NPH:
             return Column(
               children: [
-                Text('Liều NPH: ${firstSlowInsulin(weight)}'),
+                Text('+ Liều NPH: ${firstSlowInsulin(weight)}'),
               ],
             );
           case YesInsulinSlowStatus.Glargine:
             return Column(
-              children: [Text('Liều Glargine: ${firstSlowInsulin(weight)}')],
+              children: [Text('+ Liều Glargine: ${firstSlowInsulin(weight)}')],
             );
           default:
         }
