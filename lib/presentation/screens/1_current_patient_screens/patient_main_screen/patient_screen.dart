@@ -25,28 +25,30 @@ class PatientScreen extends StatelessWidget {
       appBar: AppBar(
         flexibleSpace: PatientNavigatorBar(),
       ),
-      body: Column(
-        children: [
-          DoctorImage(),
-          Column(
-            children: [
-              BlocBuilder<TimeCheckCubit, int>(
-                builder: ((context, state) {
-                  if (inSondeRange(DateTime.now()))
-                    return Column(
-                      children: [
-                        Text(DateTime.now().toString()),
-                        Text('OK'),
-                        PatientStatusLayer(),
-                      ],
-                    );
-                  else
-                    return Text('Chưa đcến giờ điều trị');
-                }),
-              ),
-            ],
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            DoctorImage(),
+            Column(
+              children: [
+                BlocBuilder<TimeCheckCubit, int>(
+                  builder: ((context, state) {
+                    if (inSondeRange(DateTime.now()))
+                      return Column(
+                        children: [
+                          Text(DateTime.now().toString()),
+                          Text('OK'),
+                          PatientStatusLayer(),
+                        ],
+                      );
+                    else
+                      return Text('Chưa đcến giờ điều trị');
+                  }),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       // body: top_navigation_bar_patient(),
       bottomNavigationBar: BottomNavigatorBar(),
@@ -69,10 +71,18 @@ class DoctorImage extends StatelessWidget {
             // width: widthDevideMethod(0.1),
             // height: heightDevideMethod(0.372),
           ),
-          SizedBox(
-              // width: widthDevideMethod(0.7),
-              child: Image.asset("assets/images/doctor.jpg",
-                  height: 200, width: 200, fit: BoxFit.fitHeight)),
+          Container(
+            alignment: Alignment.center,
+            child: SizedBox(
+                height: 200,
+                width: 330,
+                // width: widthDevideMethod(0.7),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Image.asset("assets/images/doctor.jpg",
+                      height: 200, width: 200, fit: BoxFit.fitHeight),
+                )),
+          ),
           Expanded(
               child: Container(
                   //  height:
@@ -99,5 +109,3 @@ class ResetPatientStatusButton extends StatelessWidget {
         icon: Icon(Icons.restart_alt_outlined));
   }
 }
-
-
