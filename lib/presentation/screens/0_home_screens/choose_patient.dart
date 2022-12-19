@@ -60,7 +60,7 @@ class ChoosePatientAction extends StatelessWidget {
                   }),
                   // PickerPatientButton(),
                   Text(BlocProvider.of<TextFormCubit>(context).state),
-                ],
+                ].reversed.toList(),
               );
             },
           ),

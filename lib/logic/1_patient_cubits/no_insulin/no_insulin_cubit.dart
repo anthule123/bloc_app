@@ -104,7 +104,7 @@ class NoInsulinCubit extends Cubit<NoInsulinState> {
 }
 
 bool bad(num glucose) {
-  return (glucose > 8.3 && glucose < 3.9);
+  return (glucose > 8.3 || glucose < 3.9);
 }
 
 bool lowBadGlucose(num glucose) {

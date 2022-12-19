@@ -37,7 +37,8 @@ class create_ID extends StatelessWidget {
     return BlocProvider(
       create: (_) => TextFormCubit(),
       child: BlocBuilder<TextFormCubit, String>(
-        builder: (context, state) => Column(
+        builder: (context, state) => ListView(
+          padding: EdgeInsets.all(32),
           children: [
             SizedBox(height: 20),
             Text(
@@ -113,7 +114,8 @@ class ConfirmButton extends StatelessWidget {
                             NiceButtons(
                                 stretch: false,
                                 onTap: (finish) {
-                                  Navigator.of(context,rootNavigator: true).pop();
+                                  Navigator.of(context, rootNavigator: true)
+                                      .pop();
                                   Navigator.of(context, rootNavigator: true)
                                       .popAndPushNamed('/profileMakingFinal');
                                 },

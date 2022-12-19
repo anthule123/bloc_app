@@ -63,32 +63,29 @@ class DoctorImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
-        children: [
-          Container(
-            color: Colors.white,
-            // width: widthDevideMethod(0.1),
-            // height: heightDevideMethod(0.372),
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: SizedBox(
-                height: 200,
-                width: 330,
-                // width: widthDevideMethod(0.7),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Image.asset("assets/images/doctor.jpg",
-                      height: 200, width: 200, fit: BoxFit.fitHeight),
-                )),
-          ),
-          Expanded(
-              child: Container(
-                  //  height:
-                  //   heightDevideMethod(0.372),
-                  color: const Color(0xfff5f6f6))),
-          ResetPatientStatusButton(),
-        ],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            Container(
+              color: Colors.white,
+              // width: widthDevideMethod(0.1),
+              // height: heightDevideMethod(0.372),
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: SizedBox(
+                  height: 200,
+                  width: 330,
+                  // width: widthDevideMethod(0.7),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Image.asset("assets/images/doctor.jpg",
+                        height: 200, width: 200, fit: BoxFit.fitHeight),
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }
