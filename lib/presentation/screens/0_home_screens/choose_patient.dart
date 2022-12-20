@@ -1,6 +1,8 @@
 import 'package:bloc_app/data/data_providers/home/check_existed_id.dart';
+import 'package:bloc_app/data/models/export.dart';
 import 'package:bloc_app/logic/0_home_cubits/choose_patient/check_existed_id_cubit.dart';
 import 'package:bloc_app/logic/0_home_cubits/choose_patient/choose_patient_cubit.dart';
+import 'package:bloc_app/logic/1_patient_cubits/profile_patient/profile_patient_cubit.dart';
 import 'package:bloc_app/logic/one_shot_cubits/text_form/text_form_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -85,10 +87,13 @@ class PickerPatientButton extends StatelessWidget {
     return Column(
       children: [
         BlocConsumer<ChoosePatientCubit, String>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            // patient profile cubit update
+            BlocProvider.of<ProfilePatientCubit>(context).update(state);
+          },
           builder: (context, state) {
             String id = context.read<TextFormCubit>().state;
-
+          
             return Column(
               children: [
                 //Text('ID nay hop le'),

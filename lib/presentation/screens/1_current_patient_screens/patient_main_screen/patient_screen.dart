@@ -41,7 +41,7 @@ class PatientScreen extends StatelessWidget {
                         ],
                       );
                     else
-                      return Text('Chưa đến giờ điều trị');
+                      return Text(waitingMessage(DateTime.now()));
                   }),
                 ),
               ],

@@ -41,6 +41,6 @@ int nextRange(DateTime t) {
 String waitingMessage(DateTime t) {
   int index_next_range = nextRange(t);
   int h = sondeRange[index_next_range].start.hour;
-  int m = sondeRange[index_next_range].start.hour;
+  int m = sondeRange[index_next_range].start.minute;
   return 'Bạn phải đợi đến $h: $m cho lần đo tiếp theo.';
 }

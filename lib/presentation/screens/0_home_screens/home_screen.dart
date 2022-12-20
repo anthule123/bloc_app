@@ -27,13 +27,17 @@ class HomeScreen extends StatelessWidget {
           BlocBuilder<InternetCubit, InternetState>(builder: ((context, state) {
             switch (state.runtimeType) {
               case InternetConnected:
-                return Column(
+                // đưa icon sang bên phải
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CreatePatientButton(),
                     ChoosePatientAction(),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    CreatePatientButton(),
                   ].toList(),
                 );
-
               default:
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

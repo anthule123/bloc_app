@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc_app/logic/1_patient_cubits/yes_insulin/yes_insulin_fast/yes_insulin_fast_cubit.dart';
+import 'package:bloc_app/logic/2_doctor_cubit/cubit/profile_doctor_cubit.dart';
 import 'package:bloc_app/logic/bar_cubits/navigator_bar_cubit.dart';
 
 import 'package:bloc_app/presentation/screens/0_home_screens/create_patient/create_name.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../logic/0_home_cubits/create_patient/patient_creation_cubit.dart';
+import '../../logic/1_patient_cubits/profile_patient/profile_patient_cubit.dart';
 import '../../logic/1_patient_cubits/yes_insulin/yes_insulin_slow/yes_insulin_slow_cubit.dart';
 import '../../logic/one_shot_cubits/time_check/time_check_cubit.dart';
 import '../screens/0_home_screens/create_patient/create_weight.dart';
@@ -29,6 +31,11 @@ class AppRouter {
       DoctorNavigatorBarCubit();
   final YesInsulinFastCubit yesInsulinFastCubit = YesInsulinFastCubit();
   final YesInsulinSlowCubit yesInsulinSlowCubit = YesInsulinSlowCubit();
+  // Tạo cubit profile patient
+  final ProfilePatientCubit profilePatientCubit = ProfilePatientCubit();
+
+  // Tạo cubit profile doctor
+  final ProfileDoctorCubit profileDoctorCubit = ProfileDoctorCubit();
 //final NoInsulinCubit noInsulinCubit = NoInsulinCubit();
   MaterialPageRoute? onGeneratedRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -95,12 +102,15 @@ class AppRouter {
             ),
           ),
         );
-
+// đưa bloc patient profile vào patient screen
       case ('/patient/profile'):
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
             value: patientNavigatorBarCubit,
-            child: PatientProfileScreen(),
+            child: BlocProvider.value(
+              value: profilePatientCubit,
+              child: PatientProfileScreen(),
+            ),
           ),
         );
       case ('/patient/history'):

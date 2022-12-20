@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import '../../widgets/bars/patient_navigator_bar.dart';
 
+// Tạo form để hiển thị thông tin của bệnh nhân
 class PatientProfileScreen extends StatelessWidget {
   const PatientProfileScreen({super.key});
 
@@ -14,7 +15,34 @@ class PatientProfileScreen extends StatelessWidget {
       appBar: AppBar(
         flexibleSpace: PatientNavigatorBar(),
       ),
-      body: Column(),
+      // Tạo tên, tuổi, cân nặng, chiều cao của bệnh nhân, TextSize: 20, Thêm khoảng trắng ở giữa
+      body: Container(
+        child: Column(
+          children: [
+            Text(
+              'Tên: ',
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              'Tuổi: ',
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              'Cân nặng: ',
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              'Chiều cao: ',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            // Tạo nút để thêm thông tin bệnh nhân
+          ],
+        ),
+      ),
+
       bottomNavigationBar: BottomNavigatorBar(),
     );
   }
